@@ -3,5 +3,6 @@
 
     <string name="gain_total_control_of_your_money">Gain total control of your money</string>
     <string name="become_your_own_money_manager_and_make_every_cent_count">Become your own money manager and make every cent count</string>
-
+    <string name="sign_up">Sign Up</string>
+    <string name="login">Login</string>
 </resources>
