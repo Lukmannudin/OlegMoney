@@ -5,4 +5,8 @@
     <string name="become_your_own_money_manager_and_make_every_cent_count">Become your own money manager and make every cent count</string>
     <string name="sign_up">Sign Up</string>
     <string name="login">Login</string>
+    <string name="know_where_your_money_goes">Know where yourmoney goes</string>
+    <string name="planning_ahead">Planning ahead</string>
+    <string name="track_your_transaction_easily_with_categories_and_financial_report">Track your transaction easily, with categories and financial report </string>
+    <string name="setup_your_budget_for_each_category_so_you_in_control">Setup your budget for each category so you in control</string>
 </resources>
