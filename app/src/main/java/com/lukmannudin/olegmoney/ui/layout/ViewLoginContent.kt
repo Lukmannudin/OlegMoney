@@ -30,8 +30,8 @@ import com.lukmannudin.olegmoney.ui.theme.OlegTheme
 @Composable
 fun ViewLogin() {
     OlegTheme {
-        val loginText = remember {
-            mutableStateOf(LoginPayload(0, 0))
+        val content = remember {
+            mutableStateOf(ViewLoginContent(0, 0))
         }
 
         val pagerState = rememberPagerState()
@@ -47,31 +47,10 @@ fun ViewLogin() {
                 state = pagerState,
                 count = 3
             ) { pageIndex ->
-                when (pageIndex) {
-                    1 -> {
-                        loginText.value.apply {
-                            titleId = R.string.know_where_your_money_goes
-                            descriptionId =
-                                R.string.track_your_transaction_easily_with_categories_and_financial_report
-                        }
-                    }
-                    2 -> {
-                        loginText.value.apply {
-                            titleId = R.string.planning_ahead
-                            descriptionId =
-                                R.string.setup_your_budget_for_each_category_so_you_in_control
-                        }
-                    }
-                    else -> {
-                        loginText.value.apply {
-                            titleId = R.string.gain_total_control_of_your_money
-                            descriptionId =
-                                R.string.become_your_own_money_manager_and_make_every_cent_count
-                        }
-                    }
-                }
-                with(loginText.value) {
-                    ContentLayout(pageIndex, titleId, descriptionId)
+                content.value = contentByState(pageIndex)
+
+                with(content.value) {
+                    ContentLayout(titleId = titleId, descriptionId = descriptionId)
                 }
             }
 
@@ -90,9 +69,34 @@ fun ViewLogin() {
     }
 }
 
+private fun contentByState(pageIndex: Int): ViewLoginContent {
+    return when (pageIndex) {
+        1 -> {
+            ViewLoginContent(
+                titleId = R.string.know_where_your_money_goes,
+                descriptionId =
+                R.string.track_your_transaction_easily_with_categories_and_financial_report
+            )
+        }
+        2 -> {
+            ViewLoginContent(
+                titleId = R.string.planning_ahead,
+                descriptionId =
+                R.string.setup_your_budget_for_each_category_so_you_in_control
+            )
+        }
+        else -> {
+            ViewLoginContent(
+                titleId = R.string.gain_total_control_of_your_money,
+                descriptionId =
+                R.string.become_your_own_money_manager_and_make_every_cent_count
+            )
+        }
+    }
+}
+
 @Composable
 private fun ContentLayout(
-    pageIndex: Int,
     @StringRes titleId: Int,
     @StringRes descriptionId: Int,
 ) {
@@ -130,7 +134,7 @@ private fun ContentLayout(
     }
 }
 
-private data class LoginPayload(
+private data class ViewLoginContent(
     @StringRes var titleId: Int,
     @StringRes var descriptionId: Int
 )
