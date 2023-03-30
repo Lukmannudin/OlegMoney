@@ -26,6 +26,12 @@ val Typography = Typography(
         fontSize = TextSize.titleMedium,
         color = Color.Black
     ),
+    titleSmall = TextStyle(
+        fontFamily = FontInter,
+        fontWeight = FontWeight.Medium,
+        fontSize = TextSize.titleMedium,
+        color = Color.Black
+    ),
     // same as bodyMedium
     bodyLarge = TextStyle(
         fontFamily = FontInter,

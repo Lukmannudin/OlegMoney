@@ -15,6 +15,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
@@ -26,9 +27,20 @@ import com.lukmannudin.olegmoney.ui.material.FilledTonalButton
 import com.lukmannudin.olegmoney.ui.theme.Dimens
 import com.lukmannudin.olegmoney.ui.theme.OlegTheme
 
+
+@Preview(showBackground = true)
+@Composable
+fun DefaultPreview() {
+    OlegTheme {
+        LoginScreen(onNavigateToSignup = {})
+    }
+}
+
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun ViewLogin() {
+fun LoginScreen(
+    onNavigateToSignup: () -> Unit
+) {
     OlegTheme {
         val content = remember {
             mutableStateOf(ViewLoginContent(0, 0))
@@ -63,7 +75,7 @@ fun ViewLogin() {
 
             Spacer(modifier = Modifier.height(Dimens.SpacingXXXL))
 
-            FilledButton(text = stringResource(id = R.string.sign_up)) {}
+            FilledButton(text = stringResource(id = R.string.sign_up)) { onNavigateToSignup.invoke() }
             FilledTonalButton(text = stringResource(id = R.string.login)) {}
         }
     }
