@@ -1,5 +1,6 @@
 package com.lukmannudin.olegmoney.ui.layout
 
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -22,8 +23,8 @@ import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
 import com.lukmannudin.olegmoney.R
 import com.lukmannudin.olegmoney.ui.DotsIndicator
-import com.lukmannudin.olegmoney.ui.material.FilledButton
-import com.lukmannudin.olegmoney.ui.material.FilledTonalButton
+import com.lukmannudin.olegmoney.ui.material.OlegFilledButton
+import com.lukmannudin.olegmoney.ui.material.OlegFilledTonalButton
 import com.lukmannudin.olegmoney.ui.theme.Dimens
 import com.lukmannudin.olegmoney.ui.theme.OlegTheme
 
@@ -32,18 +33,18 @@ import com.lukmannudin.olegmoney.ui.theme.OlegTheme
 @Composable
 fun DefaultPreview() {
     OlegTheme {
-        LoginScreen(onNavigateToSignup = {})
+        OnboardingScreen(onNavigateToSignup = {})
     }
 }
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun LoginScreen(
+fun OnboardingScreen(
     onNavigateToSignup: () -> Unit
 ) {
     OlegTheme {
         val content = remember {
-            mutableStateOf(ViewLoginContent(0, 0))
+            mutableStateOf(ViewLoginContent(0, 0, 0))
         }
 
         val pagerState = rememberPagerState()
@@ -62,7 +63,11 @@ fun LoginScreen(
                 content.value = contentByState(pageIndex)
 
                 with(content.value) {
-                    ContentLayout(titleId = titleId, descriptionId = descriptionId)
+                    ContentLayout(
+                        iconRes = iconRes,
+                        titleId = titleId,
+                        descriptionId = descriptionId
+                    )
                 }
             }
 
@@ -75,8 +80,8 @@ fun LoginScreen(
 
             Spacer(modifier = Modifier.height(Dimens.SpacingXXXL))
 
-            FilledButton(text = stringResource(id = R.string.sign_up)) { onNavigateToSignup.invoke() }
-            FilledTonalButton(text = stringResource(id = R.string.login)) {}
+            OlegFilledButton(text = stringResource(id = R.string.sign_up)) { onNavigateToSignup.invoke() }
+            OlegFilledTonalButton(text = stringResource(id = R.string.login)) {}
         }
     }
 }
@@ -85,6 +90,7 @@ private fun contentByState(pageIndex: Int): ViewLoginContent {
     return when (pageIndex) {
         1 -> {
             ViewLoginContent(
+                iconRes = R.drawable.ic_money_flow,
                 titleId = R.string.know_where_your_money_goes,
                 descriptionId =
                 R.string.track_your_transaction_easily_with_categories_and_financial_report
@@ -92,6 +98,7 @@ private fun contentByState(pageIndex: Int): ViewLoginContent {
         }
         2 -> {
             ViewLoginContent(
+                iconRes = R.drawable.ic_plan,
                 titleId = R.string.planning_ahead,
                 descriptionId =
                 R.string.setup_your_budget_for_each_category_so_you_in_control
@@ -99,6 +106,7 @@ private fun contentByState(pageIndex: Int): ViewLoginContent {
         }
         else -> {
             ViewLoginContent(
+                iconRes = R.drawable.ic_holding_money_big,
                 titleId = R.string.gain_total_control_of_your_money,
                 descriptionId =
                 R.string.become_your_own_money_manager_and_make_every_cent_count
@@ -109,8 +117,9 @@ private fun contentByState(pageIndex: Int): ViewLoginContent {
 
 @Composable
 private fun ContentLayout(
+    @DrawableRes iconRes: Int,
     @StringRes titleId: Int,
-    @StringRes descriptionId: Int,
+    @StringRes descriptionId: Int
 ) {
     Column(
         Modifier
@@ -124,7 +133,7 @@ private fun ContentLayout(
 
 
         Image(
-            painter = painterResource(id = R.drawable.ic_holding_money_big),
+            painter = painterResource(id = iconRes),
             contentDescription = "",
             contentScale = ContentScale.Fit,
             modifier = imageModifier
@@ -147,6 +156,7 @@ private fun ContentLayout(
 }
 
 private data class ViewLoginContent(
+    @DrawableRes var iconRes: Int,
     @StringRes var titleId: Int,
     @StringRes var descriptionId: Int
 )

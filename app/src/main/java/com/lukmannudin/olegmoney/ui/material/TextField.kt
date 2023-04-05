@@ -1,10 +1,7 @@
 package com.lukmannudin.olegmoney.ui.material
 
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
@@ -24,7 +21,7 @@ fun OlegTextField(
             state.value = it
         },
         label = {
-            Text(name)
+            Text(name, style = MaterialTheme.typography.bodyMedium)
         },
         colors = TextFieldDefaults.outlinedTextFieldColors(
             unfocusedBorderColor = OlegColor.FloralWhite,

@@ -6,7 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.lukmannudin.olegmoney.ui.layout.LoginScreen
+import com.lukmannudin.olegmoney.ui.layout.OnboardingScreen
 import com.lukmannudin.olegmoney.ui.layout.SignupScreen
 
 @Composable
@@ -21,7 +21,7 @@ fun OlegMoneyNavHost(
         startDestination = startDestination
     ) {
         composable(Navigations.LOGIN) {
-            LoginScreen(
+            OnboardingScreen(
                 onNavigateToSignup = {
                     navController.navigate(Navigations.SIGNUP)
                 }

@@ -35,9 +35,9 @@ val Typography = Typography(
     // same as bodyMedium
     bodyLarge = TextStyle(
         fontFamily = FontInter,
-        fontWeight = FontWeight.Normal,
+        fontWeight = FontWeight.Medium,
         fontSize = TextSize.bodyMedium,
-        color = OlegColor.SpanishGray
+        color = Color.Black
     ),
     bodyMedium = TextStyle(
         fontFamily = FontInter,
