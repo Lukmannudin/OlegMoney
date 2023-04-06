@@ -7,6 +7,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -38,6 +39,7 @@ fun SignupScreen(
         val name = remember { mutableStateOf("") }
         val email = remember { mutableStateOf("") }
         val password = remember { mutableStateOf("") }
+        val passwordVisible = remember{ mutableStateOf(false) }
         val readCondition = remember { mutableStateOf(false) }
 
         Scaffold(
@@ -72,7 +74,11 @@ fun SignupScreen(
 
                 Spacer(modifier = Modifier.height(Dimens.spacingXXS))
 
-                OlegTextField(name = stringResource(id = R.string.password), state = password)
+                OlegPasswordTextField(
+                    name = stringResource(id = R.string.password),
+                    state = password,
+                    passwordVisibleState = passwordVisible
+                )
 
                 Spacer(modifier = Modifier.height(Dimens.spacingXXS))
 
