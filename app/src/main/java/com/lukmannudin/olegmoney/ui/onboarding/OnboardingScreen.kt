@@ -1,4 +1,4 @@
-package com.lukmannudin.olegmoney.ui.layout
+package com.lukmannudin.olegmoney.ui.onboarding
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes

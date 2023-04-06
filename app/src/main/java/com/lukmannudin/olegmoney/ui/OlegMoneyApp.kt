@@ -6,8 +6,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.lukmannudin.olegmoney.ui.layout.OnboardingScreen
 import com.lukmannudin.olegmoney.ui.layout.SignupScreen
+import com.lukmannudin.olegmoney.ui.onboarding.OnboardingScreen
 
 @Composable
 fun OlegMoneyNavHost(
