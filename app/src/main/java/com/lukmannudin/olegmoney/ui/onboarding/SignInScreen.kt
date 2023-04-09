@@ -32,7 +32,8 @@ fun SignupPreview() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SignInScreen(
-    onBack: () -> Unit
+    onBack: () -> Unit,
+
 ) {
     OlegTheme {
         val name = remember { mutableStateOf("") }

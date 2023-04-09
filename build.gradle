@@ -22,4 +22,5 @@ ext {
     fragment_ktx_version = "1.5.6"
     retrofit_version = "2.9.0"
     hilt_version = "2.44"
+    gms_version = "20.5.0"
 }
