@@ -1,4 +1,4 @@
-package com.lukmannudin.olegmoney.ui.layout
+package com.lukmannudin.olegmoney.ui.onboarding
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
@@ -24,14 +24,15 @@ import com.lukmannudin.olegmoney.ui.util.parseFont
 @Composable
 fun SignupPreview() {
     OlegTheme {
-        SignupScreen(onBack = {})
+        SignupScreen(onBack = {}, onLogin = {})
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SignupScreen(
-    onBack: () -> Unit
+    onBack: () -> Unit,
+    onLogin: () -> Unit
 ) {
     OlegTheme {
         val name = remember { mutableStateOf("") }
@@ -89,7 +90,7 @@ fun SignupScreen(
 
                 Spacer(modifier = Modifier.height(Dimens.spacingXS))
 
-                OlegFilledButton(text = stringResource(id = R.string.sign_up)) { }
+                PrimaryButton(text = stringResource(id = R.string.sign_up)) { }
 
                 Spacer(modifier = Modifier.height(Dimens.spacingXXS))
 
@@ -115,11 +116,9 @@ fun SignupScreen(
                 ) {
                     Text(text = stringResource(id = R.string.already_have_an_account), style = MaterialTheme.typography.bodyMedium)
                     Spacer(modifier = Modifier.width(2.dp))
-                    Text(
-                        text = stringResource(id = R.string.login),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = OlegColor.Violet
-                    )
+                    OlegClickableText(text = stringResource(id = R.string.login)) {
+                        onLogin.invoke()
+                    }
                 }
             }
         }

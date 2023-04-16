@@ -7,42 +7,50 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
 object TextSize {
-    val titleLarge = 32.sp
-    val titleMedium = 24.sp
-    val bodyLarge = 18.sp
-    val bodyMedium = 16.sp
+    val title1 = 32.sp
+    val title2 = 24.sp
+    val title3 = 18.sp
+    val regular1 = 16.sp
+    val regular2 = 14.sp
+    val small = 13.sp
+    val tiny = 12.sp
 }
 
 val Typography = Typography(
     titleLarge = TextStyle(
         fontFamily = FontInter,
         fontWeight = FontWeight.Bold,
-        fontSize = TextSize.titleLarge,
+        fontSize = TextSize.title1,
         color = Color.Black,
     ),
     titleMedium = TextStyle(
         fontFamily = FontInter,
         fontWeight = FontWeight.Bold,
-        fontSize = TextSize.titleMedium,
+        fontSize = TextSize.title2,
         color = Color.Black
     ),
     titleSmall = TextStyle(
         fontFamily = FontInter,
         fontWeight = FontWeight.Medium,
-        fontSize = TextSize.titleMedium,
+        fontSize = TextSize.title2,
         color = Color.Black
     ),
-    // same as bodyMedium
     bodyLarge = TextStyle(
         fontFamily = FontInter,
-        fontWeight = FontWeight.Medium,
-        fontSize = TextSize.bodyMedium,
+        fontWeight = FontWeight.Bold,
+        fontSize = TextSize.title3,
         color = Color.Black
     ),
     bodyMedium = TextStyle(
         fontFamily = FontInter,
         fontWeight = FontWeight.Normal,
-        fontSize = TextSize.bodyMedium,
+        fontSize = TextSize.regular1,
         color = OlegColor.SpanishGray
-    )
+    ),
+    bodySmall = TextStyle(
+        fontFamily = FontInter,
+        fontWeight = FontWeight.Normal,
+        fontSize = TextSize.regular2,
+        color = OlegColor.SpanishGray
+    ),
 )

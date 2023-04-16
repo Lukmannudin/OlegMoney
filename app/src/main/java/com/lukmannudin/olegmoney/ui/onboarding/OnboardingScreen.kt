@@ -23,8 +23,9 @@ import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
 import com.lukmannudin.olegmoney.R
 import com.lukmannudin.olegmoney.ui.DotsIndicator
-import com.lukmannudin.olegmoney.ui.material.OlegFilledButton
-import com.lukmannudin.olegmoney.ui.material.OlegFilledTonalButton
+import com.lukmannudin.olegmoney.ui.material.PrimaryButton
+import com.lukmannudin.olegmoney.ui.material.PlainButton
+import com.lukmannudin.olegmoney.ui.material.SecondaryButton
 import com.lukmannudin.olegmoney.ui.theme.Dimens
 import com.lukmannudin.olegmoney.ui.theme.OlegTheme
 
@@ -33,14 +34,18 @@ import com.lukmannudin.olegmoney.ui.theme.OlegTheme
 @Composable
 fun DefaultPreview() {
     OlegTheme {
-        OnboardingScreen(onNavigateToSignup = {})
+        OnboardingScreen(
+            onNavigateToSignup = {},
+            onNavigateToLogin = {}
+        )
     }
 }
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun OnboardingScreen(
-    onNavigateToSignup: () -> Unit
+    onNavigateToSignup: () -> Unit,
+    onNavigateToLogin: () -> Unit
 ) {
     OlegTheme {
         val content = remember {
@@ -80,8 +85,8 @@ fun OnboardingScreen(
 
             Spacer(modifier = Modifier.height(Dimens.SpacingXXXL))
 
-            OlegFilledButton(text = stringResource(id = R.string.sign_up)) { onNavigateToSignup.invoke() }
-            OlegFilledTonalButton(text = stringResource(id = R.string.login)) {}
+            PrimaryButton(text = stringResource(id = R.string.sign_up)) { onNavigateToSignup.invoke() }
+            SecondaryButton(text = stringResource(id = R.string.login)) { onNavigateToLogin.invoke() }
         }
     }
 }

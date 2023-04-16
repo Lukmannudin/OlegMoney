@@ -18,7 +18,7 @@ import com.lukmannudin.olegmoney.ui.theme.OlegColor
 import com.lukmannudin.olegmoney.ui.theme.Shapes
 
 @Composable
-fun OlegFilledButton(
+fun PrimaryButton(
     text: String,
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
@@ -33,7 +33,7 @@ fun OlegFilledButton(
 }
 
 @Composable
-fun OlegFilledTonalButton(
+fun SecondaryButton(
     text: String,
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
@@ -41,9 +41,24 @@ fun OlegFilledTonalButton(
     Button(
         modifier = modifier.fillMaxWidth(),
         onClick = onClick,
-        colors = ButtonDefaults.buttonColors(containerColor = OlegColor.LightViolet),
+        colors = ButtonDefaults.buttonColors(containerColor = OlegColor.Violet20),
         shape = Shapes.medium,
-        content = { LocalTextStyle(text = text, OlegColor.Violet) }
+        content = { LocalTextStyle(text = text, OlegColor.Violet100) }
+    )
+}
+
+@Composable
+fun PlainButton(
+    text: String,
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit,
+) {
+    Button(
+        modifier = modifier.fillMaxWidth(),
+        onClick = onClick,
+        colors = ButtonDefaults.buttonColors(containerColor = OlegColor.Violet100),
+        shape = Shapes.medium,
+        content = { LocalTextStyle(text = text, OlegColor.Light80) }
     )
 }
 
@@ -59,8 +74,8 @@ fun OlegOutlinedButton(
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(containerColor = Color.White),
         shape = Shapes.medium,
-        border = BorderStroke(1.dp, OlegColor.FloralWhite),
-        content = { LocalTextStyle(text = text, Color.Black, iconRes) }
+        border = BorderStroke(1.dp, OlegColor.Light60),
+        content = { LocalTextStyle(text = text, OlegColor.Dark50, iconRes) }
     )
 }
 

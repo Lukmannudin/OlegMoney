@@ -6,15 +6,15 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.lukmannudin.olegmoney.ui.layout.SignupScreen
+import com.lukmannudin.olegmoney.ui.onboarding.SignupScreen
 import com.lukmannudin.olegmoney.ui.onboarding.OnboardingScreen
-import com.lukmannudin.olegmoney.ui.onboarding.SignInScreen
+import com.lukmannudin.olegmoney.ui.onboarding.LoginScreen
 
 @Composable
 fun OlegMoneyNavHost(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
-    startDestination: String = Navigations.SIGNIN
+    startDestination: String = Navigations.ONBOARDING
 ) {
     NavHost(
         modifier = modifier,
@@ -25,17 +25,22 @@ fun OlegMoneyNavHost(
             OnboardingScreen(
                 onNavigateToSignup = {
                     navController.navigate(Navigations.SIGNUP)
+                },
+                onNavigateToLogin = {
+                    navController.navigate(Navigations.LOGIN)
                 }
             )
         }
         composable(Navigations.SIGNUP) {
             SignupScreen(
-                onBack = { navController.navigate(Navigations.SIGNUP) }
+                onBack = { navController.navigate(Navigations.ONBOARDING) },
+                onLogin = { navController.navigate(Navigations.LOGIN) }
             )
         }
-        composable(Navigations.SIGNIN) {
-            SignInScreen(
-                onBack = { navController.navigate(Navigations.SIGNIN) }
+        composable(Navigations.LOGIN) {
+            LoginScreen(
+                onBack = { navController.navigate(Navigations.ONBOARDING) },
+                onSignUp = { navController.navigate(Navigations.SIGNUP) }
             )
         }
     }
