@@ -1,6 +1,10 @@
 package com.lukmannudin.olegmoney.ui.material
 
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
@@ -8,9 +12,18 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import com.lukmannudin.olegmoney.R
+import com.lukmannudin.olegmoney.ui.theme.Dimens
 import com.lukmannudin.olegmoney.ui.theme.OlegColor
 import com.lukmannudin.olegmoney.ui.theme.Shapes
 
@@ -21,20 +34,13 @@ fun OlegTextField(
     state: MutableState<String>,
     modifier: Modifier = Modifier,
 ) {
-    OutlinedTextField(
-        value = state.value,
-        onValueChange = {
-            state.value = it
-        },
-        label = {
-            Text(name, style = MaterialTheme.typography.bodyMedium)
-        },
-        colors = TextFieldDefaults.outlinedTextFieldColors(
-            unfocusedBorderColor = OlegColor.FloralWhite,
-            focusedBorderColor = OlegColor.Violet
-        ),
-        shape = Shapes.medium,
-        modifier = modifier.fillMaxWidth()
+    OutlinedTextField(value = state.value, onValueChange = {
+        state.value = it
+    }, label = {
+        Text(name, style = MaterialTheme.typography.bodyMedium)
+    }, colors = TextFieldDefaults.outlinedTextFieldColors(
+        unfocusedBorderColor = OlegColor.FloralWhite, focusedBorderColor = OlegColor.Violet
+    ), shape = Shapes.medium, modifier = modifier.fillMaxWidth()
     )
 }
 
@@ -46,38 +52,74 @@ fun OlegPasswordTextField(
     state: MutableState<String>,
     passwordVisibleState: MutableState<Boolean> = mutableStateOf(false),
 ) {
-    OutlinedTextField(
-        value = state.value,
-        onValueChange = {
-            state.value = it
-        },
-        label = {
-            Text(name, style = MaterialTheme.typography.bodyMedium)
-        },
-        colors = TextFieldDefaults.outlinedTextFieldColors(
-            unfocusedBorderColor = OlegColor.FloralWhite,
-            focusedBorderColor = OlegColor.Violet
-        ),
-        shape = Shapes.medium,
-        visualTransformation =
-        if (passwordVisibleState.value) {
-            VisualTransformation.None
+    OutlinedTextField(value = state.value, onValueChange = {
+        state.value = it
+    }, label = {
+        Text(name, style = MaterialTheme.typography.bodyMedium)
+    }, colors = TextFieldDefaults.outlinedTextFieldColors(
+        unfocusedBorderColor = OlegColor.FloralWhite, focusedBorderColor = OlegColor.Violet
+    ), shape = Shapes.medium, visualTransformation = if (passwordVisibleState.value) {
+        VisualTransformation.None
+    } else {
+        PasswordVisualTransformation()
+    }, trailingIcon = {
+        val image = if (passwordVisibleState.value) {
+            Icons.Filled.Visibility
         } else {
-            PasswordVisualTransformation()
-        },
-        trailingIcon = {
-            val image = if (passwordVisibleState.value) {
-                Icons.Filled.Visibility
-            } else {
-                Icons.Filled.VisibilityOff
-            }
+            Icons.Filled.VisibilityOff
+        }
 
-            val description = if (passwordVisibleState.value) "Hide password" else "Show password"
+        val description = if (passwordVisibleState.value) "Hide password" else "Show password"
 
-            IconButton(onClick = {passwordVisibleState.value = !passwordVisibleState.value}) {
-                Icon(imageVector = image, contentDescription = description  )
-            }
-        },
-        modifier = modifier.fillMaxWidth()
+        IconButton(onClick = { passwordVisibleState.value = !passwordVisibleState.value }) {
+            Icon(imageVector = image, contentDescription = description)
+        }
+    }, modifier = modifier.fillMaxWidth()
     )
+}
+
+@Composable
+fun PinTextField(
+    pinState: MutableState<String> = remember { mutableStateOf("") },
+    maxDigit: Int = 6
+) {
+    BasicTextField(
+        modifier = Modifier.height(40.dp), value = pinState.value, onValueChange = {
+        if (it.length <= maxDigit) {
+            pinState.value = it
+        }
+    }, keyboardOptions = KeyboardOptions(
+        keyboardType = KeyboardType.NumberPassword
+    ), decorationBox = {
+        Row(
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.height(40.dp)
+        ) {
+            repeat(maxDigit) { index ->
+                val char = when {
+                    index >= pinState.value.length -> ""
+                    else -> pinState.value[index].toString()
+                }
+
+                if (char.isNotEmpty()) {
+                    Text(
+                        text = char,
+                        style = MaterialTheme.typography.titleLarge,
+                        color = OlegColor.Dark75,
+                        textAlign = TextAlign.Center,
+                    )
+                } else {
+                    Box(
+                        modifier = Modifier
+                            .size(Dimens.spacing)
+                            .clip(CircleShape)
+                            .background(OlegColor.Light20),
+                    )
+                }
+
+                Spacer(modifier = Modifier.width(Dimens.spacing))
+            }
+        }
+    })
 }

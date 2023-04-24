@@ -1,4 +1,4 @@
-package com.lukmannudin.olegmoney.ui.data.user
+package com.lukmannudin.olegmoney.data.user
 
 import retrofit2.http.GET
 

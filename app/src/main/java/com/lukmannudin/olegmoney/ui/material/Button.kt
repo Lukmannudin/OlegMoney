@@ -24,7 +24,7 @@ fun PrimaryButton(
     onClick: () -> Unit,
 ) {
     Button(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth().height(56.dp),
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(containerColor = OlegColor.Violet),
         shape = Shapes.medium,
@@ -39,7 +39,7 @@ fun SecondaryButton(
     onClick: () -> Unit,
 ) {
     Button(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth().height(56.dp),
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(containerColor = OlegColor.Violet20),
         shape = Shapes.medium,

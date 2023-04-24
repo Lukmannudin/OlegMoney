@@ -86,6 +86,9 @@ fun OnboardingScreen(
             Spacer(modifier = Modifier.height(Dimens.SpacingXXXL))
 
             PrimaryButton(text = stringResource(id = R.string.sign_up)) { onNavigateToSignup.invoke() }
+
+            Spacer(modifier = Modifier.height(Dimens.spacing))
+
             SecondaryButton(text = stringResource(id = R.string.login)) { onNavigateToLogin.invoke() }
         }
     }

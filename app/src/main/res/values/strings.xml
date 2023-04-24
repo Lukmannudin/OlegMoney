@@ -5,6 +5,7 @@
     <string name="become_your_own_money_manager_and_make_every_cent_count">Become your own money manager and make every cent count</string>
     <string name="sign_up">Sign Up</string>
     <string name="sign_in">Sign In</string>
+    <string name="verification">Verification</string>
     <string name="login">Login</string>
     <string name="know_where_your_money_goes">Know where your money goes</string>
     <string name="planning_ahead">Planning ahead</string>
@@ -18,4 +19,8 @@
     <string name="already_have_an_account">Already have an account?</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="dont_have_an_account_yet">Don’t have an account yet?</string>
+    <string name="enter_your_verification_code">Enter your Verification Code</string>
+    <string name="we_send_verification_code_to_your_email">We send verification code to your email %s. You can check your inbox.</string>
+    <string name="i_didnt_received_the_code">I didn’t received the code? Send again</string>
+    <string name="verify">Verify</string>
 </resources>

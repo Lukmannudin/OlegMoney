@@ -8,7 +8,7 @@ object OlegColor {
     val Dark25 = Color(0xFF7A7E80)
     val Dark50 = Color(0xFF464A4D)
     val Dark75 = Color(0xFF161719)
-    val Dark100 = Color(0xFFD9D9D9)
+    val Dark100 = Color(0xFF0A0A0A)
 
     // light
     val Light20 = Color(0xFFE3E5E5)

@@ -1,6 +1,6 @@
 package com.lukmannudin.olegmoney.ui.di
 
-import com.lukmannudin.olegmoney.ui.data.user.UserService
+import com.lukmannudin.olegmoney.data.user.UserService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
