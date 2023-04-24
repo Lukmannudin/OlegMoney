@@ -9,13 +9,12 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -80,11 +79,18 @@ fun OlegPasswordTextField(
 
 @Composable
 fun PinTextField(
+    modifier: Modifier = Modifier,
     pinState: MutableState<String> = remember { mutableStateOf("") },
     maxDigit: Int = 6
 ) {
+    val focusRequester = remember { FocusRequester() }
+
     BasicTextField(
-        modifier = Modifier.height(40.dp), value = pinState.value, onValueChange = {
+        modifier = modifier
+            .height(40.dp)
+            .focusRequester(focusRequester),
+        value = pinState.value,
+        onValueChange = {
         if (it.length <= maxDigit) {
             pinState.value = it
         }
@@ -122,4 +128,8 @@ fun PinTextField(
             }
         }
     })
+
+    LaunchedEffect(Unit) {
+        focusRequester.requestFocus()
+    }
 }
