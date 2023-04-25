@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace 'com.lukmannudin.olegmoney'
+    namespace 'com.ludi.olegmoney'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.lukmannudin.olegmoney"
+        applicationId "com.ludi.olegmoney"
         minSdk 24
         targetSdk 33
         versionCode 1
