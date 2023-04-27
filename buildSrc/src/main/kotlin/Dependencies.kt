@@ -9,6 +9,13 @@ object Sdk {
     const val minApiLevelVersion = 24
 }
 
+object Plugins {
+    const val androidAppVersion = "7.4.0"
+    const val kotlinAndroidVersion = "1.8.10"
+    const val hiltAndroidVersion = "2.44"
+    const val detektVersion = "1.22.0"
+}
+
 object Versions {
     const val core = "1.10.0"
     const val lifecycle = "2.6.1"
