@@ -89,6 +89,7 @@ dependencies {
 
     // retrofit
     implementation(Dependencies.Retrofit.retrofit)
+    implementation(Dependencies.Retrofit.converterGson)
 
     // hilt
     implementation(Dependencies.Hilt.android)

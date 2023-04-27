@@ -1,3 +1,5 @@
+import java.net.URI
+
 pluginManagement {
     repositories {
         google()
@@ -9,8 +11,9 @@ pluginManagement {
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
-        google()
+        google()    // no need to declare this in `allProjects` if its declared here
         mavenCentral()
+        maven { url = URI("https://jitpack.io") }
     }
 }
 

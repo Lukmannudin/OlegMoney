@@ -25,6 +25,8 @@ object Versions {
     const val hiltVersion = "2.44"
     const val gmsVersion = "20.5.0"
     const val retromock = "1.1.1"
+    const val composeMaterial3 = "1.0.1"
+    const val composeUiTooling = "1.4.2"
 }
 
 object Dependencies {
@@ -50,9 +52,9 @@ object Dependencies {
 
     object Compose {
         const val composeBom = "androidx.compose:compose-bom:${Versions.jetpackComposeVersionBom}"
-        const val material3 = "androidx.compose.material3:material3"
-        const val uiToolingPreview = "androidx.compose.ui:ui-tooling-preview"
-        const val uiTooling = "androidx.compose.ui:ui-tooling"
+        const val material3 = "androidx.compose.material3:material3:${Versions.composeMaterial3}"
+        const val uiToolingPreview = "androidx.compose.ui:ui-tooling-preview:${Versions.composeUiTooling}"
+        const val uiTooling = "androidx.compose.ui:ui-tooling:${Versions.composeUiTooling}"
     }
 
     object ComposeMaterials {
@@ -63,6 +65,7 @@ object Dependencies {
 
     object Retrofit {
         const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofitVersion}"
+        const val converterGson = "com.squareup.retrofit2:converter-gson:${Versions.retrofitVersion}"
     }
 
     object Hilt {
