@@ -51,10 +51,15 @@ android {
     packagingOptions {
         resources.excludes += "/META-INF/{AL2.0,LGPL2.1}"
     }
+
+    externalNativeBuild {
+        cmake {
+            path = File("CMakeLists.txt")
+        }
+    }
 }
 
 // Allow references to generated code
-
 kapt {
     correctErrorTypes = true
 }

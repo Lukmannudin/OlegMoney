@@ -1,5 +1,6 @@
 package com.ludi.olegmoney.di
 
+import com.ludi.olegmoney.util.Keys
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -11,12 +12,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
-    private const val BASE_URL = "https://api.github.com/"
-
     @Provides
     fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(Keys.baseUrl())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
