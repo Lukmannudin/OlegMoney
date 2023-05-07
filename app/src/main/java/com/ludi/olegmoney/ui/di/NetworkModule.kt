@@ -1,6 +1,6 @@
 package com.ludi.olegmoney.ui.di
 
-import com.ludi.olegmoney.data.user.UserService
+import com.ludi.olegmoney.data.api.ApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,7 +26,7 @@ object NetworkModule {
     @Singleton
     fun provideUserService(
         retrofit: Retrofit
-    ): UserService {
-        return retrofit.create(UserService::class.java)
+    ): ApiService {
+        return retrofit.create(ApiService::class.java)
     }
 }

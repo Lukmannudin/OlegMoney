@@ -1,10 +1,12 @@
 package com.ludi.olegmoney.data.user
 
+import com.ludi.olegmoney.data.Resource
+import com.ludi.olegmoney.data.api.ApiHelper
 import javax.inject.Inject
 
-class UserNetworkDataSource @Inject constructor(private val userService: UserService) {
+class UserNetworkDataSource @Inject constructor(private val apiHelper: ApiHelper) {
 
-    fun login(username: String, password: String) {
-        userService.login(username, password)
+    suspend fun signUp(signUpRequest: SignUpRequest): Resource<Unit> {
+        return apiHelper.signUp(signUpRequest)
     }
 }

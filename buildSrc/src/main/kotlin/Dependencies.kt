@@ -34,6 +34,7 @@ object Versions {
     const val retromock = "1.1.1"
     const val composeMaterial3 = "1.0.1"
     const val composeUiTooling = "1.4.2"
+    const val moshi = "2.4.0"
 }
 
 object Dependencies {
@@ -82,6 +83,10 @@ object Dependencies {
 
     object PlayServices {
         const val auth = "com.google.android.gms:play-services-auth:${Versions.gms}"
+    }
+
+    object Moshi {
+        const val converter = "com.squareup.retrofit2:converter-moshi:${Versions.moshi}"
     }
 
     const val retromock = "co.infinum:retromock:${Versions.retromock}"

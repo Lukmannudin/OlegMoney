@@ -105,4 +105,7 @@ dependencies {
 
     // retromock
     implementation(Dependencies.retromock)
+
+    // moshi
+    implementation(Dependencies.Moshi.converter)
 }
