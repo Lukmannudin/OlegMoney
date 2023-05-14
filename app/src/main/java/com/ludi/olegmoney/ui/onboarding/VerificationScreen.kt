@@ -30,7 +30,7 @@ fun VerificationPreview() {
     OlegTheme {
         VerificationScreen(
             User(
-                id = 1123, "Lebron James", "lebronKing@gmail.com", "", ""
+                "Lebron James", "lebronKing@gmail.com"
             )
         ) {}
     }

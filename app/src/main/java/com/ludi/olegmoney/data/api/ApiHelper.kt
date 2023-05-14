@@ -2,24 +2,25 @@ package com.ludi.olegmoney.data.api
 
 import com.ludi.olegmoney.data.Resource
 import com.ludi.olegmoney.data.user.SignUpRequest
+import com.ludi.olegmoney.data.user.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 interface ApiHelper {
-    suspend fun signUp(request: SignUpRequest): Resource<Unit>
+    suspend fun signUp(request: SignUpRequest): Resource<User>
 }
 
 class ApiHelperImpl @Inject constructor(
     private val apiService: ApiService
 ) : ApiHelper {
 
-    override suspend fun signUp(request: SignUpRequest): Resource<Unit> {
+    override suspend fun signUp(request: SignUpRequest): Resource<User> {
         return withContext(Dispatchers.IO) {
             try {
                 val response = apiService.signup(request)
                 if (response.isSuccessful) {
-                    Resource.Success(Unit)
+                    Resource.Success(User(request.name, request.email))
                 } else {
                     Resource.Error(response.message())
                 }

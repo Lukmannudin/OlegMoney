@@ -32,12 +32,12 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
 
     buildFeatures {
@@ -75,6 +75,7 @@ dependencies {
 
     // test
     testImplementation(Dependencies.Junit.jUnit)
+    testImplementation(Dependencies.Robolectric.robolectric)
     androidTestImplementation(Dependencies.AndroidXTest.extJUnit)
     androidTestImplementation(Dependencies.AndroidXTest.espressoCore)
 
@@ -99,6 +100,8 @@ dependencies {
     // hilt
     implementation(Dependencies.Hilt.android)
     kapt(Dependencies.Hilt.compiler)
+    testImplementation(Dependencies.Hilt.hiltAndroidTest)
+    kaptTest(Dependencies.Hilt.hiltCompilerTest)
 
     // play services
     implementation(Dependencies.PlayServices.auth)
@@ -108,4 +111,12 @@ dependencies {
 
     // moshi
     implementation(Dependencies.Moshi.converter)
+
+    // coroutines
+    implementation(Dependencies.Coroutines.coroutines)
+    testImplementation(Dependencies.Coroutines.coroutinesTest)
+}
+
+hilt {
+    enableTransformForLocalTests = true
 }

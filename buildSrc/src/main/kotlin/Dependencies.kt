@@ -10,7 +10,7 @@ object Sdk {
 }
 
 object Plugins {
-    const val androidAppVersion = "7.4.0"
+    const val androidAppVersion = "7.4.2"
     const val kotlinAndroidVersion = "1.8.10"
     const val hiltAndroidVersion = "2.44"
     const val detektVersion = "1.22.0"
@@ -35,6 +35,8 @@ object Versions {
     const val composeMaterial3 = "1.0.1"
     const val composeUiTooling = "1.4.2"
     const val moshi = "2.4.0"
+    const val coroutines = "1.3.9"
+    const val robolectric = "4.10.2"
 }
 
 object Dependencies {
@@ -52,23 +54,30 @@ object Dependencies {
         const val jUnit = "junit:junit:${Versions.junit}"
     }
 
+    object Robolectric {
+        const val robolectric = "org.robolectric:robolectric:${Versions.robolectric}"
+    }
+
     object AndroidXTest {
         const val extJUnit = "androidx.test.ext:junit:${Versions.testExt}"
-        const val espressoCore =
-            "androidx.test.espresso:espresso-core:${Versions.testEspresso}"
+        const val espressoCore = "androidx.test.espresso:espresso-core:${Versions.testEspresso}"
     }
 
     object Compose {
         const val composeBom = "androidx.compose:compose-bom:${Versions.jetpackComposeVersionBom}"
         const val material3 = "androidx.compose.material3:material3:${Versions.composeMaterial3}"
-        const val uiToolingPreview = "androidx.compose.ui:ui-tooling-preview:${Versions.composeUiTooling}"
+        const val uiToolingPreview =
+            "androidx.compose.ui:ui-tooling-preview:${Versions.composeUiTooling}"
         const val uiTooling = "androidx.compose.ui:ui-tooling:${Versions.composeUiTooling}"
     }
 
     object ComposeMaterials {
-        const val accompanistPager = "com.google.accompanist:accompanist-pager:${Versions.accompanist}"
-        const val navigation = "androidx.navigation:navigation-compose:${Versions.navigationCompose}"
-        const val materialsIconExtended = "androidx.compose.material:material-icons-extended:${Versions.materialIconsCompose}"
+        const val accompanistPager =
+            "com.google.accompanist:accompanist-pager:${Versions.accompanist}"
+        const val navigation =
+            "androidx.navigation:navigation-compose:${Versions.navigationCompose}"
+        const val materialsIconExtended =
+            "androidx.compose.material:material-icons-extended:${Versions.materialIconsCompose}"
     }
 
     object Retrofit {
@@ -79,6 +88,8 @@ object Dependencies {
     object Hilt {
         const val android = "com.google.dagger:hilt-android:${Versions.hilt}"
         const val compiler = "com.google.dagger:hilt-android-compiler:${Versions.hilt}"
+        const val hiltAndroidTest = "com.google.dagger:hilt-android-testing:${Versions.hilt}"
+        const val hiltCompilerTest = "com.google.dagger:hilt-android-compiler:${Versions.hilt}"
     }
 
     object PlayServices {
@@ -89,6 +100,10 @@ object Dependencies {
         const val converter = "com.squareup.retrofit2:converter-moshi:${Versions.moshi}"
     }
 
-    const val retromock = "co.infinum:retromock:${Versions.retromock}"
+    object Coroutines {
+        const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
+        const val coroutinesTest = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}"
+    }
 
+    const val retromock = "co.infinum:retromock:${Versions.retromock}"
 }

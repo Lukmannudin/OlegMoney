@@ -6,7 +6,7 @@ import javax.inject.Inject
 
 class UserNetworkDataSource @Inject constructor(private val apiHelper: ApiHelper) {
 
-    suspend fun signUp(signUpRequest: SignUpRequest): Resource<Unit> {
+    suspend fun signUp(signUpRequest: SignUpRequest): Resource<User> {
         return apiHelper.signUp(signUpRequest)
     }
 }

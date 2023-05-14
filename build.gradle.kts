@@ -6,7 +6,9 @@ plugins {
     id("io.gitlab.arturbosch.detekt") version Plugins.detektVersion
 }
 
-detekt {
-
+buildscript {
+    dependencies {
+        classpath("com.google.dagger:hilt-android-gradle-plugin:2.44")
+    }
 }
 

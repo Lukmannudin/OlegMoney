@@ -4,6 +4,7 @@ import com.ludi.olegmoney.data.api.ApiHelper
 import com.ludi.olegmoney.data.api.ApiHelperImpl
 import com.ludi.olegmoney.data.api.ApiService
 import com.ludi.olegmoney.util.Keys
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,9 +30,11 @@ object NetworkModule {
     @Singleton
     fun provideUserService(retrofit: Retrofit): ApiService = retrofit.create(ApiService::class.java)
 
-    @Provides
-    @Singleton
-    fun provideApiHelper(apiService: ApiService): ApiHelper {
-        return ApiHelperImpl(apiService)
+    @Module
+    @InstallIn(SingletonComponent::class)
+    abstract class SingletonModule {
+        @Singleton
+        @Binds
+        abstract fun provideApiHelper(apiHelperImpl: ApiHelperImpl): ApiHelper
     }
 }
