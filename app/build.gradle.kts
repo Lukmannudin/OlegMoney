@@ -1,9 +1,14 @@
+import org.jetbrains.kotlin.serialization.builtins.main
 
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
+}
+
+apply {
+    from("${project.rootDir}/gradle-scripts/script-wire.gradle")
 }
 
 android {
@@ -118,7 +123,6 @@ dependencies {
 
     // play services
     implementation(Dependencies.PlayServices.auth)
-    implementation("com.google.android.gms:play-services-auth:20.7.0")
 
     // retromock
     implementation(Dependencies.retromock)
@@ -129,10 +133,6 @@ dependencies {
     // coroutines
     implementation(Dependencies.Coroutines.coroutines)
     testImplementation(Dependencies.Coroutines.coroutinesTest)
-
-    // wiremock
-
-
 }
 
 hilt {

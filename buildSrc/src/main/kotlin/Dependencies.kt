@@ -40,6 +40,7 @@ object Versions {
     const val androidXTestVersion = "1.0.1"
     const val compose = "1.4.3"
     const val hiltNavigationCompose = "1.0.0"
+    const val wire = "4.9.1"
 }
 
 object Dependencies {
@@ -115,5 +116,11 @@ object Dependencies {
             "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}"
     }
 
+    object Wire {
+        const val wireRuntime = "com.squareup.wire:wire-runtime:${Versions.wire}"
+        const val wireCompiler = "com.squareup.wire:wire-compiler:${Versions.wire}"
+    }
+
     const val retromock = "co.infinum:retromock:${Versions.retromock}"
+
 }
