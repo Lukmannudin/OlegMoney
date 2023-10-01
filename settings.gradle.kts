@@ -1,5 +1,8 @@
 import java.net.URI
 
+include(":sharedkmm")
+
+
 pluginManagement {
     repositories {
         google()
@@ -9,7 +12,7 @@ pluginManagement {
 }
 
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
     repositories {
         google()    // no need to declare this in `allProjects` if its declared here
         mavenCentral()

@@ -40,6 +40,12 @@ android {
         jvmTarget = "11"
     }
 
+    kotlin {
+        jvmToolchain {
+            languageVersion.set(JavaLanguageVersion.of("11"))
+        }
+    }
+
     buildFeatures {
         compose = true
     }
@@ -72,12 +78,18 @@ dependencies {
     implementation(Dependencies.AndroidX.lifecyleViewModelCompose)
     implementation(Dependencies.AndroidX.activityCompose)
     implementation(Dependencies.AndroidX.fragmentKtx)
+    implementation("androidx.test.ext:junit-ktx:1.1.5")
+    implementation(project(mapOf("path" to ":sharedkmm")))
 
     // test
     testImplementation(Dependencies.Junit.jUnit)
     testImplementation(Dependencies.Robolectric.robolectric)
     androidTestImplementation(Dependencies.AndroidXTest.extJUnit)
     androidTestImplementation(Dependencies.AndroidXTest.espressoCore)
+    androidTestImplementation(Dependencies.AndroidXTest.runner)
+    androidTestImplementation(Dependencies.AndroidXTest.rules)
+    androidTestImplementation(Dependencies.Compose.uiTest)
+    debugImplementation(Dependencies.Compose.uiTestManifest)
 
     // jetpack compose bom
     implementation(Dependencies.Compose.composeBom)
@@ -92,6 +104,7 @@ dependencies {
     implementation(Dependencies.ComposeMaterials.accompanistPager)
     implementation(Dependencies.ComposeMaterials.navigation)
     implementation(Dependencies.ComposeMaterials.materialsIconExtended)
+    implementation(Dependencies.ComposeMaterials.hiltNavigation)
 
     // retrofit
     implementation(Dependencies.Retrofit.retrofit)
@@ -105,6 +118,7 @@ dependencies {
 
     // play services
     implementation(Dependencies.PlayServices.auth)
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
 
     // retromock
     implementation(Dependencies.retromock)
@@ -115,6 +129,10 @@ dependencies {
     // coroutines
     implementation(Dependencies.Coroutines.coroutines)
     testImplementation(Dependencies.Coroutines.coroutinesTest)
+
+    // wiremock
+
+
 }
 
 hilt {

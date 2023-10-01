@@ -30,11 +30,6 @@ object NetworkModule {
     @Singleton
     fun provideUserService(retrofit: Retrofit): ApiService = retrofit.create(ApiService::class.java)
 
-    @Module
-    @InstallIn(SingletonComponent::class)
-    abstract class SingletonModule {
-        @Singleton
-        @Binds
-        abstract fun provideApiHelper(apiHelperImpl: ApiHelperImpl): ApiHelper
-    }
+    @Provides
+    fun provideApiHelper(apiHelperImpl: ApiHelperImpl): ApiHelper = apiHelperImpl
 }

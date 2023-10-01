@@ -1,30 +1,46 @@
 package com.ludi.olegmoney.ui.onboarding
 
+import android.app.Activity
+import android.util.Log
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.Task
 import com.ludi.olegmoney.R
 import com.ludi.olegmoney.ui.material.*
 import com.ludi.olegmoney.ui.theme.Dimens
 import com.ludi.olegmoney.ui.theme.OlegColor
 import com.ludi.olegmoney.ui.theme.OlegTheme
+import com.ludi.olegmoney.ui.util.AuthResultContract
 import com.ludi.olegmoney.ui.util.parseFont
+import kotlinx.coroutines.launch
 
 @Preview
 @Composable
 fun SignupPreview() {
     OlegTheme {
-        SignupScreen(onBack = {}, onLogin = {})
+        SignupScreen(onBack = {}, onLogin = {}, signUpViewModel = viewModel())
     }
 }
 
@@ -32,13 +48,39 @@ fun SignupPreview() {
 @Composable
 fun SignupScreen(
     onBack: () -> Unit,
-    onLogin: () -> Unit
+    onLogin: () -> Unit,
+    signUpViewModel: SignUpViewModel
 ) {
+
+    val coroutineScope = rememberCoroutineScope()
+    var text by remember { mutableStateOf<String?>(null) }
+    val signInRequestCode = 1
+
+    val authResultLauncher =
+        rememberLauncherForActivityResult(contract = AuthResultContract()) { task ->
+            try {
+                val account = task?.getResult(ApiException::class.java)
+                if (account == null) {
+                    text = "Google sign in failed"
+                } else {
+                    coroutineScope.launch {
+                        signUpViewModel.signUp(
+                            email = account.email ?: "",
+                            name = account.displayName ?: "",
+                            password = ""
+                        )
+                    }
+                }
+            } catch (e: ApiException) {
+                text = "Google sign in failed"
+            }
+        }
+
     OlegTheme {
         val name = remember { mutableStateOf("") }
         val email = remember { mutableStateOf("") }
         val password = remember { mutableStateOf("") }
-        val passwordVisible = remember{ mutableStateOf(false) }
+        val passwordVisible = remember { mutableStateOf(false) }
         val readCondition = remember { mutableStateOf(false) }
 
         Scaffold(
@@ -90,7 +132,13 @@ fun SignupScreen(
 
                 Spacer(modifier = Modifier.height(Dimens.spacingXS))
 
-                PrimaryButton(text = stringResource(id = R.string.sign_up)) { }
+                PrimaryButton(text = stringResource(id = R.string.sign_up)) {
+                    signUpViewModel.signUp(
+                        name.value,
+                        email.value,
+                        password.value,
+                    )
+                }
 
                 Spacer(modifier = Modifier.height(Dimens.spacingXXS))
 
@@ -105,8 +153,10 @@ fun SignupScreen(
 
                 OlegOutlinedButton(
                     text = stringResource(id = R.string.signup_with_google),
-                    iconRes = R.drawable.ic_google
-                ) {}
+                    iconRes = R.drawable.ic_google,
+                ) {
+                    authResultLauncher.launch(signInRequestCode)
+                }
 
                 Spacer(modifier = Modifier.height(Dimens.SpacingXL))
 
@@ -114,7 +164,10 @@ fun SignupScreen(
                     horizontalArrangement = Arrangement.Center,
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Text(text = stringResource(id = R.string.already_have_an_account), style = MaterialTheme.typography.bodyMedium)
+                    Text(
+                        text = stringResource(id = R.string.already_have_an_account),
+                        style = MaterialTheme.typography.bodyMedium
+                    )
                     Spacer(modifier = Modifier.width(2.dp))
                     OlegClickableText(text = stringResource(id = R.string.login)) {
                         onLogin.invoke()

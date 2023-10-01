@@ -37,6 +37,9 @@ object Versions {
     const val moshi = "2.4.0"
     const val coroutines = "1.3.9"
     const val robolectric = "4.10.2"
+    const val androidXTestVersion = "1.0.1"
+    const val compose = "1.4.3"
+    const val hiltNavigationCompose = "1.0.0"
 }
 
 object Dependencies {
@@ -61,6 +64,8 @@ object Dependencies {
     object AndroidXTest {
         const val extJUnit = "androidx.test.ext:junit:${Versions.testExt}"
         const val espressoCore = "androidx.test.espresso:espresso-core:${Versions.testEspresso}"
+        const val runner = "androidx.test:runner:${Versions.androidXTestVersion}"
+        const val rules = "androidx.test:rules:1.5.0"
     }
 
     object Compose {
@@ -69,6 +74,8 @@ object Dependencies {
         const val uiToolingPreview =
             "androidx.compose.ui:ui-tooling-preview:${Versions.composeUiTooling}"
         const val uiTooling = "androidx.compose.ui:ui-tooling:${Versions.composeUiTooling}"
+        const val uiTest = "androidx.compose.ui:ui-test-junit4:${Versions.compose}"
+        const val uiTestManifest = "androidx.compose.ui:ui-test-manifest:${Versions.compose}"
     }
 
     object ComposeMaterials {
@@ -78,6 +85,7 @@ object Dependencies {
             "androidx.navigation:navigation-compose:${Versions.navigationCompose}"
         const val materialsIconExtended =
             "androidx.compose.material:material-icons-extended:${Versions.materialIconsCompose}"
+        const val hiltNavigation = "androidx.hilt:hilt-navigation-compose:${Versions.hiltNavigationCompose}"
     }
 
     object Retrofit {
@@ -101,8 +109,10 @@ object Dependencies {
     }
 
     object Coroutines {
-        const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
-        const val coroutinesTest = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}"
+        const val coroutines =
+            "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
+        const val coroutinesTest =
+            "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}"
     }
 
     const val retromock = "co.infinum:retromock:${Versions.retromock}"

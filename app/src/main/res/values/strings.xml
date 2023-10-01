@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Oleg Money</string>
+    <string name="gcp_id">616434022796-prgu8rm9b6jcnuie5q5nmga15lb50q6u.apps.googleusercontent.com</string>
 
     <string name="gain_total_control_of_your_money">Gain total control of your money</string>
     <string name="become_your_own_money_manager_and_make_every_cent_count">Become your own money manager and make every cent count</string>

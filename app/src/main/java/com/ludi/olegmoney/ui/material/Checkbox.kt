@@ -9,7 +9,10 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.AnnotatedString
+import com.ludi.olegmoney.util.TestTag
 
 @Composable
 fun CheckboxWithText(
@@ -21,6 +24,7 @@ fun CheckboxWithText(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Checkbox(
+            modifier = Modifier.testTag(TestTag.CHECKBOX),
             checked = checkState.value,
             onCheckedChange = {
                 checkState.value = it
