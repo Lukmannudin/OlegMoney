@@ -133,6 +133,9 @@ dependencies {
     // coroutines
     implementation(Dependencies.Coroutines.coroutines)
     testImplementation(Dependencies.Coroutines.coroutinesTest)
+
+    // wire
+    implementation(Dependencies.Wire.wireRuntime)
 }
 
 hilt {
