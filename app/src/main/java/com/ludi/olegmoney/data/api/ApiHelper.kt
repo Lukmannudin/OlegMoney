@@ -1,14 +1,15 @@
 package com.ludi.olegmoney.data.api
 
 import com.ludi.olegmoney.data.Resource
+import com.ludi.olegmoney.data.user.LoginRequest
 import com.ludi.olegmoney.data.user.SignUpRequest
 import com.ludi.olegmoney.data.user.User
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 interface ApiHelper {
     suspend fun signUp(request: SignUpRequest): Resource<User>
+
+    suspend fun login(request: LoginRequest): Resource<String>
 }
 
 class ApiHelperImpl @Inject constructor(
@@ -16,17 +17,31 @@ class ApiHelperImpl @Inject constructor(
 ) : ApiHelper {
 
     override suspend fun signUp(request: SignUpRequest): Resource<User> {
-        return withContext(Dispatchers.IO) {
-            try {
-                val response = apiService.signup(request)
-                if (response.isSuccessful) {
-                    Resource.Success(User(request.name, request.email))
-                } else {
-                    Resource.Error(response.message())
-                }
-            } catch (e: Exception) {
-                Resource.Error(e.message ?: "something went wrong")
+        return try {
+            val response = apiService.signup(request)
+            if (response.isSuccessful) {
+                Resource.Success(User(request.name, request.email))
+            } else {
+                Resource.Error(response.body()?.message ?: "")
             }
+        } catch (e: Exception) {
+            Resource.Error(e.message ?: "something went wrong")
+        }
+    }
+
+    override suspend fun login(request: LoginRequest): Resource<String> {
+        return try {
+            val response = apiService.login(request)
+            if (response.isSuccessful) {
+                println("login: ${response.body()?.data?.token}")
+                Resource.Success(response.body()?.data?.token!!)
+            } else {
+                println("login: ${response.body()?.message}")
+                Resource.Error(response.body()?.message ?: "")
+            }
+        } catch (e: Exception) {
+            println("login: ${e.message}}")
+            Resource.Error(e.message ?: "something went wrong")
         }
     }
 

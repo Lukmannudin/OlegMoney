@@ -2,9 +2,7 @@ package com.ludi.olegmoney.ui.onboarding
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.ludi.olegmoney.data.user.SignUpRequest
 import com.ludi.olegmoney.data.user.User
 import com.ludi.olegmoney.data.user.UserNetworkDataSource
@@ -38,6 +36,7 @@ class SignUpViewModel @Inject constructor(
             )
 
             val response = userNetworkDataSource.signUp(signUpRequest)
+            _user.value = response.data
         }
     }
 

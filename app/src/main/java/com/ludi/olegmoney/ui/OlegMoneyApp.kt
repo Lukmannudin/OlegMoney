@@ -49,7 +49,8 @@ fun OlegMoneyNavHost(
         composable(Navigations.LOGIN) {
             LoginScreen(
                 onBack = { navController.navigate(Navigations.ONBOARDING) },
-                onSignUp = { navController.navigate(Navigations.SIGNUP) }
+                onSignUp = { navController.navigate(Navigations.SIGNUP) },
+                loginViewModel = hiltViewModel()
             )
         }
     }

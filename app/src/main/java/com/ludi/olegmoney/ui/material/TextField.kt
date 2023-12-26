@@ -19,6 +19,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ludi.olegmoney.ui.theme.Dimens
 import com.ludi.olegmoney.ui.theme.OlegColor
@@ -45,14 +46,14 @@ fun OlegTextField(
 @Composable
 fun OlegPasswordTextField(
     modifier: Modifier = Modifier,
-    name: String,
+    label: String,
     state: MutableState<String>,
     passwordVisibleState: MutableState<Boolean> = mutableStateOf(false),
 ) {
     OutlinedTextField(value = state.value, onValueChange = {
         state.value = it
     }, label = {
-        Text(name, style = MaterialTheme.typography.bodyMedium)
+        Text(label, style = MaterialTheme.typography.bodyMedium)
     }, colors = TextFieldDefaults.outlinedTextFieldColors(
         unfocusedBorderColor = OlegColor.FloralWhite, focusedBorderColor = OlegColor.Violet
     ), shape = Shapes.medium, visualTransformation = if (passwordVisibleState.value) {
@@ -130,4 +131,10 @@ fun PinTextField(
     LaunchedEffect(Unit) {
         focusRequester.requestFocus()
     }
+}
+
+@Preview
+@Composable
+fun pinTextView() {
+    PinTextField()
 }

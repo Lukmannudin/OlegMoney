@@ -1,16 +1,11 @@
 package com.ludi.olegmoney.ui.onboarding
 
-import android.app.Activity
-import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -23,7 +18,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
@@ -34,6 +28,7 @@ import com.ludi.olegmoney.ui.theme.OlegColor
 import com.ludi.olegmoney.ui.theme.OlegTheme
 import com.ludi.olegmoney.ui.util.AuthResultContract
 import com.ludi.olegmoney.ui.util.parseFont
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Preview
@@ -116,7 +111,7 @@ fun SignupScreen(
                 Spacer(modifier = Modifier.height(Dimens.spacingXXS))
 
                 OlegPasswordTextField(
-                    name = stringResource(id = R.string.password),
+                    label = stringResource(id = R.string.password),
                     state = password,
                     passwordVisibleState = passwordVisible
                 )

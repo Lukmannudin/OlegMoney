@@ -13,6 +13,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ludi.olegmoney.R
 import com.ludi.olegmoney.ui.material.*
 import com.ludi.olegmoney.ui.theme.Dimens
@@ -23,7 +24,7 @@ import com.ludi.olegmoney.ui.theme.OlegTheme
 @Composable
 fun LoginPreview() {
     OlegTheme {
-        LoginScreen(onBack = {}, onSignUp = {})
+        LoginScreen(onBack = {}, onSignUp = {}, loginViewModel = viewModel())
     }
 }
 
@@ -31,7 +32,8 @@ fun LoginPreview() {
 @Composable
 fun LoginScreen(
     onBack: () -> Unit,
-    onSignUp: () -> Unit
+    onSignUp: () -> Unit,
+    loginViewModel: LoginViewModel
 ) {
     OlegTheme {
         val name = remember { mutableStateOf("") }
@@ -68,14 +70,19 @@ fun LoginScreen(
                 Spacer(modifier = Modifier.height(Dimens.spacingXXS))
 
                 OlegPasswordTextField(
-                    name = stringResource(id = R.string.password),
+                    label = stringResource(id = R.string.password),
                     state = password,
                     passwordVisibleState = passwordVisible
                 )
 
                 Spacer(modifier = Modifier.height(Dimens.spacingXXL))
 
-                PrimaryButton(text = stringResource(id = R.string.login)) { }
+                PrimaryButton(text = stringResource(id = R.string.login)) {
+                    loginViewModel.login(
+                        name.value,
+                        password.value
+                    )
+                }
 
                 Spacer(modifier = Modifier.height(40.dp))
 
