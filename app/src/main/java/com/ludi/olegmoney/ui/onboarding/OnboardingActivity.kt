@@ -1,23 +1,14 @@
 package com.ludi.olegmoney.ui.onboarding
 
-import android.app.Activity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.tasks.Task
 import com.ludi.olegmoney.R
 import com.ludi.olegmoney.ui.OlegMoneyNavHost
 import com.ludi.olegmoney.ui.theme.OlegTheme
-import com.lukmannudin.sharedkmm.Greeting
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -27,7 +18,6 @@ class OnboardingActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Toast.makeText(this, Greeting().greet(), Toast.LENGTH_SHORT).show()
         setContent {
             OlegTheme {
                 OlegMoneyNavHost()

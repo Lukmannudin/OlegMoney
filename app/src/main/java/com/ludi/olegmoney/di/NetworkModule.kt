@@ -1,5 +1,7 @@
 package com.ludi.olegmoney.di
 
+import android.content.Context
+import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.ludi.olegmoney.data.api.ApiHelper
 import com.ludi.olegmoney.data.api.ApiHelperImpl
 import com.ludi.olegmoney.data.api.ApiService
@@ -8,7 +10,9 @@ import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
@@ -19,9 +23,17 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(): Retrofit {
+    fun provideRetrofit(
+        @ApplicationContext context: Context,
+    ): Retrofit {
+
+        val client = OkHttpClient.Builder()
+            .addInterceptor(ChuckerInterceptor(context))
+            .build()
+
         return Retrofit.Builder()
             .baseUrl(Keys.baseUrl())
+            .client(client)
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
     }

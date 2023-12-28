@@ -1,9 +1,11 @@
 package com.ludi.olegmoney.data.api
 
 import com.ludi.olegmoney.data.Resource
+import com.ludi.olegmoney.data.user.ErrorResponse
 import com.ludi.olegmoney.data.user.LoginRequest
 import com.ludi.olegmoney.data.user.SignUpRequest
 import com.ludi.olegmoney.data.user.User
+import com.squareup.moshi.Moshi
 import javax.inject.Inject
 
 interface ApiHelper {
@@ -22,7 +24,11 @@ class ApiHelperImpl @Inject constructor(
             if (response.isSuccessful) {
                 Resource.Success(User(request.name, request.email))
             } else {
-                Resource.Error(response.body()?.message ?: "")
+                val moshi: Moshi = Moshi.Builder().build()
+
+                val adapter = moshi.adapter(ErrorResponse::class.java)
+                val errorResponse = response.errorBody()?.string()?.let { adapter.fromJson(it) }
+                Resource.Error(errorResponse?.message)
             }
         } catch (e: Exception) {
             Resource.Error(e.message ?: "something went wrong")
@@ -33,14 +39,11 @@ class ApiHelperImpl @Inject constructor(
         return try {
             val response = apiService.login(request)
             if (response.isSuccessful) {
-                println("login: ${response.body()?.data?.token}")
                 Resource.Success(response.body()?.data?.token!!)
             } else {
-                println("login: ${response.body()?.message}")
                 Resource.Error(response.body()?.message ?: "")
             }
         } catch (e: Exception) {
-            println("login: ${e.message}}")
             Resource.Error(e.message ?: "something went wrong")
         }
     }

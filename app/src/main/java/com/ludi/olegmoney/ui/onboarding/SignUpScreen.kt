@@ -1,27 +1,32 @@
 package com.ludi.olegmoney.ui.onboarding
 
+import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.ludi.olegmoney.R
+import com.ludi.olegmoney.data.user.SignUpRequest
 import com.ludi.olegmoney.ui.material.*
 import com.ludi.olegmoney.ui.theme.Dimens
 import com.ludi.olegmoney.ui.theme.OlegColor
@@ -35,7 +40,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun SignupPreview() {
     OlegTheme {
-        SignupScreen(onBack = {}, onLogin = {}, signUpViewModel = viewModel())
+        SignupScreen(onBack = {}, onLogin = {}, onVerification = {}, signUpViewModel = viewModel())
     }
 }
 
@@ -44,6 +49,7 @@ fun SignupPreview() {
 fun SignupScreen(
     onBack: () -> Unit,
     onLogin: () -> Unit,
+    onVerification: (String) -> Unit,
     signUpViewModel: SignUpViewModel
 ) {
 
@@ -60,9 +66,13 @@ fun SignupScreen(
                 } else {
                     coroutineScope.launch {
                         signUpViewModel.signUp(
-                            email = account.email ?: "",
-                            name = account.displayName ?: "",
-                            password = ""
+                            SignUpRequest(
+                                name = account.displayName ?: account.familyName ?: account.givenName ?: "",
+                                email = account.email!!,
+                                googleId = account.id,
+                                password = "",
+                                avatarUrl = account.photoUrl.toString()
+                            )
                         )
                     }
                 }
@@ -77,6 +87,22 @@ fun SignupScreen(
         val password = remember { mutableStateOf("") }
         val passwordVisible = remember { mutableStateOf(false) }
         val readCondition = remember { mutableStateOf(false) }
+        val uiState by signUpViewModel.signUpState.collectAsStateWithLifecycle()
+
+        uiState?.let { state ->
+            when (state) {
+                is SignUpState.OnSuccess -> {
+                    LaunchedEffect(Unit) {
+                        onVerification.invoke(state.user.email)
+                    }
+                }
+                is SignUpState.OnError -> {
+                    Toast.makeText(LocalContext.current, state.message ?: "sign up failed", Toast.LENGTH_SHORT).show()
+                }
+
+                SignUpState.OnLoading -> Toast.makeText(LocalContext.current, "loading", Toast.LENGTH_SHORT).show()
+            }
+        }
 
         Scaffold(
             modifier = Modifier.fillMaxSize(),
@@ -129,9 +155,11 @@ fun SignupScreen(
 
                 PrimaryButton(text = stringResource(id = R.string.sign_up)) {
                     signUpViewModel.signUp(
-                        name.value,
-                        email.value,
-                        password.value,
+                        SignUpRequest(
+                            name.value,
+                            email.value,
+                            password.value
+                        )
                     )
                 }
 

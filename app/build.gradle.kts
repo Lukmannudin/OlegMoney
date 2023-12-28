@@ -141,6 +141,13 @@ dependencies {
     // firebase
     implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
     implementation("com.google.firebase:firebase-analytics")
+
+    // chucker
+    debugImplementation("com.github.chuckerteam.chucker:library:4.0.0")
+    releaseImplementation("com.github.chuckerteam.chucker:library-no-op:4.0.0")
+
+    // compose
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.2")
 }
 
 hilt {
