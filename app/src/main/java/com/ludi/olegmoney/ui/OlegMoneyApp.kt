@@ -9,10 +9,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.ludi.olegmoney.ui.onboarding.LoginScreen
+import com.ludi.olegmoney.ui.onboarding.login.LoginScreen
 import com.ludi.olegmoney.ui.onboarding.OnboardingScreen
-import com.ludi.olegmoney.ui.onboarding.SignupScreen
-import com.ludi.olegmoney.ui.onboarding.VerificationScreen
+import com.ludi.olegmoney.ui.onboarding.signup.SignupScreen
+import com.ludi.olegmoney.ui.onboarding.verification.VerificationScreen
 
 @Composable
 fun OlegMoneyNavHost(
@@ -55,7 +55,9 @@ fun OlegMoneyNavHost(
             val email = backStackEntry.arguments?.getString("email")
             email?.let {
                 VerificationScreen(
-                    onBack = { navController.navigate(Navigations.SIGNUP) }, email = it
+                    onBack = { navController.navigate(Navigations.SIGNUP) },
+                    email = it,
+                    verificationViewModel = hiltViewModel()
                 )
             }
         }

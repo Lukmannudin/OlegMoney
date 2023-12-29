@@ -1,10 +1,9 @@
-package com.ludi.olegmoney.ui.onboarding
+package com.ludi.olegmoney.ui.onboarding.login
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ludi.olegmoney.data.Resource
-import com.ludi.olegmoney.data.user.LoginRequest
+import com.ludi.olegmoney.data.user.request.LoginRequest
 import com.ludi.olegmoney.data.user.UserNetworkDataSource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

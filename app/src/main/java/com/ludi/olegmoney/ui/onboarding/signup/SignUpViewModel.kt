@@ -1,10 +1,10 @@
-package com.ludi.olegmoney.ui.onboarding
+package com.ludi.olegmoney.ui.onboarding.signup
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.ludi.olegmoney.data.Resource
-import com.ludi.olegmoney.data.user.SignUpRequest
+import com.ludi.olegmoney.data.user.request.SignUpRequest
 import com.ludi.olegmoney.data.user.User
 import com.ludi.olegmoney.data.user.UserNetworkDataSource
 import dagger.hilt.android.lifecycle.HiltViewModel

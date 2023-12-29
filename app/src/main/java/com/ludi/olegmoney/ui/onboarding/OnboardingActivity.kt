@@ -8,6 +8,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.ludi.olegmoney.R
 import com.ludi.olegmoney.ui.OlegMoneyNavHost
+import com.ludi.olegmoney.ui.onboarding.signup.SignUpViewModel
 import com.ludi.olegmoney.ui.theme.OlegTheme
 import dagger.hilt.android.AndroidEntryPoint
 

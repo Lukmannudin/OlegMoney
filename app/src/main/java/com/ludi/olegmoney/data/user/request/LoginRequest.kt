@@ -1,4 +1,4 @@
-package com.ludi.olegmoney.data.user
+package com.ludi.olegmoney.data.user.request
 
 import com.squareup.moshi.Json
 

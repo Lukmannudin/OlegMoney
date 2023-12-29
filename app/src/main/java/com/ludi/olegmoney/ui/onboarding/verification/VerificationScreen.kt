@@ -1,5 +1,6 @@
-package com.ludi.olegmoney.ui.onboarding
+package com.ludi.olegmoney.ui.onboarding.verification
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -16,9 +17,13 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
@@ -27,6 +32,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ludi.olegmoney.R
 import com.ludi.olegmoney.ui.material.PinTextField
 import com.ludi.olegmoney.ui.material.PrimaryButton
@@ -36,14 +43,14 @@ import com.ludi.olegmoney.ui.theme.OlegColor
 import com.ludi.olegmoney.ui.theme.OlegTheme
 import com.ludi.olegmoney.ui.theme.TextSize
 import com.ludi.olegmoney.util.annotatedString
+import kotlinx.coroutines.delay
 
 @Preview
 @Composable
 fun VerificationPreview() {
     OlegTheme {
         VerificationScreen(
-            onBack = {},
-            email = ""
+            onBack = {}, email = "", verificationViewModel = viewModel()
         )
     }
 }
@@ -52,10 +59,46 @@ fun VerificationPreview() {
 @Composable
 fun VerificationScreen(
     onBack: () -> Unit,
-    email: String
+    email: String,
+    verificationViewModel: VerificationViewModel
 ) {
     val pin = remember { mutableStateOf("") }
-    val timeLeft = remember { mutableStateOf("00:00") }
+    var timeLeft by remember { mutableStateOf("00:00") }
+    val verificationUiState by verificationViewModel.verificationUiState.collectAsStateWithLifecycle()
+
+    when (verificationUiState) {
+        is VerificationUiState.NotStarted -> {
+            // do nothing
+        }
+        is VerificationUiState.OnError -> {
+            Toast.makeText(LocalContext.current, (verificationUiState as VerificationUiState.OnError).message, Toast.LENGTH_SHORT).show()
+        }
+        is VerificationUiState.OnLoading -> {
+            Toast.makeText(LocalContext.current, "loading...", Toast.LENGTH_SHORT).show()
+        }
+        is VerificationUiState.OnSuccess -> {
+            Toast.makeText(LocalContext.current, "success...", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    LaunchedEffect(Unit) {
+        var seconds = COUNTDOWN_IN_MINUTES * 60
+        while (seconds > 0) {
+            var minutes = "${seconds / 60}"
+            var cSeconds = "${seconds % 60}"
+            if (minutes.length == 1) {
+                minutes = "0$minutes"
+            }
+
+            if (cSeconds.length == 1) {
+                cSeconds = "0$cSeconds"
+            }
+
+            timeLeft = "$minutes:$cSeconds"
+            delay(1000L)
+            seconds--
+        }
+    }
 
     Scaffold(modifier = Modifier.fillMaxSize(), topBar = {
         CenterAlignedTopAppBar(title = {
@@ -96,7 +139,7 @@ fun VerificationScreen(
                 Spacer(modifier = Modifier.height(48.dp))
 
                 Text(
-                    text = timeLeft.value,
+                    text = timeLeft,
                     style = MaterialTheme.typography.bodyLarge.plus(TextStyle(color = OlegColor.Violet100))
                 )
 
@@ -127,9 +170,14 @@ fun VerificationScreen(
                 PrimaryButton(
                     text = stringResource(id = R.string.verify)
                 ) {
-
+                    verificationViewModel.verify(
+                        email,
+                        pin.value
+                    )
                 }
             }
         }
     }
 }
+
+const val COUNTDOWN_IN_MINUTES = 5

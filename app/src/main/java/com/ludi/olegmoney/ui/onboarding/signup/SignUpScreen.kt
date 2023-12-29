@@ -1,4 +1,4 @@
-package com.ludi.olegmoney.ui.onboarding
+package com.ludi.olegmoney.ui.onboarding.signup
 
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -22,18 +22,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.tasks.Task
 import com.ludi.olegmoney.R
-import com.ludi.olegmoney.data.user.SignUpRequest
+import com.ludi.olegmoney.data.user.request.SignUpRequest
 import com.ludi.olegmoney.ui.material.*
 import com.ludi.olegmoney.ui.theme.Dimens
 import com.ludi.olegmoney.ui.theme.OlegColor
 import com.ludi.olegmoney.ui.theme.OlegTheme
 import com.ludi.olegmoney.ui.util.AuthResultContract
 import com.ludi.olegmoney.ui.util.parseFont
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Preview
