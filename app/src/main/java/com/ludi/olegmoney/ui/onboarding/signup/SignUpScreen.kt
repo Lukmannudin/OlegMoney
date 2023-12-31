@@ -42,9 +42,9 @@ import com.ludi.olegmoney.data.user.request.SignUpRequest
 import com.ludi.olegmoney.ui.material.CheckboxWithText
 import com.ludi.olegmoney.ui.material.OlegClickableText
 import com.ludi.olegmoney.ui.material.OlegOutlinedButton
-import com.ludi.olegmoney.ui.material.OlegPasswordTextField
 import com.ludi.olegmoney.ui.material.OlegTextField
 import com.ludi.olegmoney.ui.material.PrimaryButton
+import com.ludi.olegmoney.ui.material.textfield.OlegPasswordTextField
 import com.ludi.olegmoney.ui.theme.Dimens
 import com.ludi.olegmoney.ui.theme.OlegColor
 import com.ludi.olegmoney.ui.theme.OlegTheme

@@ -36,8 +36,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ludi.olegmoney.R
-import com.ludi.olegmoney.ui.material.PinTextField
 import com.ludi.olegmoney.ui.material.PrimaryButton
+import com.ludi.olegmoney.ui.material.textfield.PinTextField
 import com.ludi.olegmoney.ui.theme.Dimens
 import com.ludi.olegmoney.ui.theme.FontInter
 import com.ludi.olegmoney.ui.theme.OlegColor
