@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -28,12 +29,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ludi.olegmoney.R
 import com.ludi.olegmoney.ui.material.PinTextField
 import com.ludi.olegmoney.ui.material.PrimaryButton
@@ -44,34 +45,26 @@ import com.ludi.olegmoney.ui.theme.OlegTheme
 import com.ludi.olegmoney.ui.theme.TextSize
 import com.ludi.olegmoney.util.annotatedString
 import kotlinx.coroutines.delay
-
-@Preview
-@Composable
-fun VerificationPreview() {
-    OlegTheme {
-        VerificationScreen(
-            onBack = {}, email = "", verificationViewModel = viewModel()
-        )
-    }
-}
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.runBlocking
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun VerificationScreen(
     onBack: () -> Unit,
+    onVerify: (String, String) -> Unit,
     email: String,
-    verificationViewModel: VerificationViewModel
+    uiState: VerificationUiState
 ) {
-    val pin = remember { mutableStateOf("") }
+    var pin by remember { mutableStateOf("") }
     var timeLeft by remember { mutableStateOf("00:00") }
-    val verificationUiState by verificationViewModel.verificationUiState.collectAsStateWithLifecycle()
 
-    when (verificationUiState) {
-        is VerificationUiState.NotStarted -> {
+    when (uiState) {
+        is VerificationUiState.Idle -> {
             // do nothing
         }
         is VerificationUiState.OnError -> {
-            Toast.makeText(LocalContext.current, (verificationUiState as VerificationUiState.OnError).message, Toast.LENGTH_SHORT).show()
+            Toast.makeText(LocalContext.current, uiState.message, Toast.LENGTH_SHORT).show()
         }
         is VerificationUiState.OnLoading -> {
             Toast.makeText(LocalContext.current, "loading...", Toast.LENGTH_SHORT).show()
@@ -134,7 +127,13 @@ fun VerificationScreen(
 
                 Spacer(modifier = Modifier.height(54.dp))
 
-                PinTextField(pinState = pin)
+                PinTextField(
+                    keyboardOptions = KeyboardOptions(
+                        capitalization = KeyboardCapitalization.Characters
+                    )
+                ) {
+                    pin = it
+                }
 
                 Spacer(modifier = Modifier.height(48.dp))
 
@@ -168,15 +167,36 @@ fun VerificationScreen(
                 Spacer(modifier = Modifier.height(46.dp))
 
                 PrimaryButton(
-                    text = stringResource(id = R.string.verify)
+                    text = stringResource(id = R.string.verify),
+                    enabled = uiState !is VerificationUiState.OnLoading
                 ) {
-                    verificationViewModel.verify(
-                        email,
-                        pin.value
-                    )
+                    onVerify(email, pin)
                 }
             }
         }
+    }
+}
+
+@Preview
+@Composable
+fun VerificationPreview() {
+
+    val stateFlow = MutableStateFlow<VerificationUiState>(VerificationUiState.Idle)
+    val uiState by stateFlow.collectAsStateWithLifecycle()
+
+    OlegTheme {
+        VerificationScreen(
+            onBack = {},
+            email = "",
+            uiState = uiState,
+            onVerify = { email, pin ->
+                runBlocking {
+                    stateFlow.value = VerificationUiState.OnLoading
+                    delay(5000)
+                    stateFlow.value = VerificationUiState.OnSuccess
+                }
+            }
+        )
     }
 }
 

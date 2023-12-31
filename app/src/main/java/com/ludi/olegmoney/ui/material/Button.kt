@@ -20,9 +20,9 @@ import com.ludi.olegmoney.ui.theme.Shapes
 @Composable
 fun PrimaryButton(
     text: String,
-    enabled: Boolean = true,
     modifier: Modifier = Modifier,
-    onClick: () -> Unit,
+    enabled: Boolean = true,
+    onClick: () -> Unit = {},
 ) {
     Button(
         modifier = modifier.fillMaxWidth().height(56.dp),
@@ -69,11 +69,13 @@ fun OlegOutlinedButton(
     text: String,
     modifier: Modifier = Modifier,
     @DrawableRes iconRes: Int? = null,
+    enabled: Boolean = true,
     onClick: () -> Unit,
 ) {
     OutlinedButton(
         modifier = modifier.fillMaxWidth(),
         onClick = onClick,
+        enabled = enabled,
         colors = ButtonDefaults.buttonColors(containerColor = Color.White),
         shape = Shapes.medium,
         border = BorderStroke(1.dp, OlegColor.Light60),

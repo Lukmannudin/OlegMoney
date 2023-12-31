@@ -17,7 +17,7 @@ class VerificationViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _verificationUiState: MutableStateFlow<VerificationUiState> =
-        MutableStateFlow(VerificationUiState.NotStarted)
+        MutableStateFlow(VerificationUiState.Idle)
     val verificationUiState: StateFlow<VerificationUiState> = _verificationUiState
 
     fun verify(
@@ -46,5 +46,5 @@ sealed class VerificationUiState {
     object OnLoading : VerificationUiState()
     object OnSuccess : VerificationUiState()
     data class OnError(val message: String?) : VerificationUiState()
-    object NotStarted : VerificationUiState()
+    object Idle : VerificationUiState()
 }

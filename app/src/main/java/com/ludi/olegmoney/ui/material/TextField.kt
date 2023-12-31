@@ -104,19 +104,22 @@ fun OlegPasswordTextField(
 @Composable
 fun PinTextField(
     modifier: Modifier = Modifier,
-    pinState: MutableState<String> = remember { mutableStateOf("") },
     maxDigit: Int = 6,
-    keyboardOptions: KeyboardOptions = KeyboardOptions.Default
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    onPinChanged: (String) -> Unit = {}
 ) {
+
+    var pinState by remember { mutableStateOf("") }
     val focusRequester = remember { FocusRequester() }
 
     BasicTextField(modifier = modifier
         .height(40.dp)
         .focusRequester(focusRequester),
-        value = pinState.value,
+        value = pinState,
         onValueChange = {
             if (it.length <= maxDigit) {
-                pinState.value = it
+                pinState = it
+                onPinChanged(it)
             }
         },
         keyboardOptions = keyboardOptions,
@@ -128,8 +131,8 @@ fun PinTextField(
             ) {
                 repeat(maxDigit) { index ->
                     val char = when {
-                        index >= pinState.value.length -> ""
-                        else -> pinState.value[index].toString()
+                        index >= pinState.length -> ""
+                        else -> pinState[index].toString()
                     }
 
                     if (char.isNotEmpty()) {

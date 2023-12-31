@@ -16,6 +16,6 @@ interface ApiService {
     @POST("v1/users/sign-up")
     suspend fun signup(@Body request: SignUpRequest): Response<BaseResponse<Any>>
 
-    @POST("users/verify-account")
+    @POST("v1/users/verify-account")
     suspend fun verify(@Body request: VerificationRequest): Response<BaseResponse<Any>>
 }

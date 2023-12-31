@@ -19,8 +19,8 @@ class SignUpViewModel @Inject constructor(
     private val userNetworkDataSource: UserNetworkDataSource
 ) : ViewModel() {
 
-    private val _signUpState: MutableStateFlow<SignUpState?> = MutableStateFlow(null)
-    val signUpState: StateFlow<SignUpState?> = _signUpState
+    private val _signUpState: MutableStateFlow<SignUpState> = MutableStateFlow(SignUpState.Idle)
+    val signUpState: StateFlow<SignUpState> = _signUpState
 
     var mGoogleSignInClient: GoogleSignInClient? = null
 
@@ -42,4 +42,5 @@ sealed class SignUpState {
     object OnLoading : SignUpState()
     data class OnSuccess(val user: User) : SignUpState()
     data class OnError(val message: String?) : SignUpState()
+    object Idle : SignUpState()
 }
