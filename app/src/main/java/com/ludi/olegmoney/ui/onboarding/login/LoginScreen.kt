@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -40,9 +41,8 @@ fun LoginScreen(
     loginViewModel: LoginViewModel
 ) {
     OlegTheme {
-        val name = remember { mutableStateOf("") }
-        val password = remember { mutableStateOf("") }
-        val passwordVisible = remember { mutableStateOf(false) }
+        var name by remember { mutableStateOf("") }
+        var password by remember { mutableStateOf("") }
         val uiState by loginViewModel.loginUiState.collectAsStateWithLifecycle()
 
         uiState?.let { state ->
@@ -83,22 +83,24 @@ fun LoginScreen(
             ) {
                 Spacer(modifier = Modifier.height(56.dp))
 
-                OlegTextField(name = stringResource(id = R.string.name), state = name)
+                OlegTextField(name = stringResource(id = R.string.name)) {
+                    name = it
+                }
 
                 Spacer(modifier = Modifier.height(Dimens.spacingXXS))
 
                 OlegPasswordTextField(
                     label = stringResource(id = R.string.password),
-                    state = password,
-                    passwordVisibleState = passwordVisible
-                )
+                ) {
+                    password = it
+                }
 
                 Spacer(modifier = Modifier.height(Dimens.spacingXXL))
 
                 PrimaryButton(text = stringResource(id = R.string.login)) {
                     loginViewModel.login(
-                        name.value,
-                        password.value
+                        name,
+                        password
                     )
                 }
 

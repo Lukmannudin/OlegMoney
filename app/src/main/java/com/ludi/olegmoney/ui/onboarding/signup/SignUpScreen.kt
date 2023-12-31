@@ -79,12 +79,14 @@ fun SignupScreen(
         }
 
     OlegTheme {
-        val name = remember { mutableStateOf("") }
-        val email = remember { mutableStateOf("") }
-        val password = remember { mutableStateOf("") }
-        val passwordVisible = remember { mutableStateOf(false) }
-        val readCondition = remember { mutableStateOf(false) }
+        var name by remember { mutableStateOf("") }
+        var email by remember { mutableStateOf("") }
+        var password by remember { mutableStateOf("") }
+        var readCondition by remember { mutableStateOf(false) }
         val uiState by signUpViewModel.signUpState.collectAsStateWithLifecycle()
+        val signUpEnabled by remember {
+            mutableStateOf(name.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty())
+        }
 
         uiState?.let { state ->
             when (state) {
@@ -125,37 +127,42 @@ fun SignupScreen(
             ) {
                 Spacer(modifier = Modifier.height(56.dp))
 
-                OlegTextField(name = stringResource(id = R.string.name), state = name)
+                OlegTextField(name = stringResource(id = R.string.name))
 
                 Spacer(modifier = Modifier.height(Dimens.spacingXXS))
 
-                OlegTextField(name = stringResource(id = R.string.email), state = email)
+                OlegTextField(name = stringResource(id = R.string.email)) {
+                    email = it
+                }
 
                 Spacer(modifier = Modifier.height(Dimens.spacingXXS))
 
                 OlegPasswordTextField(
                     label = stringResource(id = R.string.password),
-                    state = password,
-                    passwordVisibleState = passwordVisible
-                )
+                ) { value ->
+                    password = value
+                }
 
                 Spacer(modifier = Modifier.height(Dimens.spacingXXS))
 
                 CheckboxWithText(
-                    checkState = readCondition,
                     annotatedString = stringResource(id = R.string.signup_terms_condition).parseFont(
                         spanStyle = SpanStyle(color = OlegColor.Violet)
                     )
-                )
+                ) {
+                    readCondition = it
+                }
 
                 Spacer(modifier = Modifier.height(Dimens.spacingXS))
 
-                PrimaryButton(text = stringResource(id = R.string.sign_up)) {
+                PrimaryButton(
+                    enabled = signUpEnabled,
+                    text = stringResource(id = R.string.sign_up)) {
                     signUpViewModel.signUp(
                         SignUpRequest(
-                            name.value,
-                            email.value,
-                            password.value
+                            name,
+                            email,
+                            password
                         )
                     )
                 }

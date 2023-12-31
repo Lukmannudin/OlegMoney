@@ -20,6 +20,7 @@ import com.ludi.olegmoney.ui.theme.Shapes
 @Composable
 fun PrimaryButton(
     text: String,
+    enabled: Boolean = true,
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
 ) {
@@ -28,6 +29,7 @@ fun PrimaryButton(
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(containerColor = OlegColor.Violet),
         shape = Shapes.medium,
+        enabled = enabled,
         content = { LocalTextStyle(text = text, Color.White) }
     )
 }

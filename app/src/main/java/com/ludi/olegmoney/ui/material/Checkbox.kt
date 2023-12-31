@@ -6,8 +6,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
@@ -16,18 +18,21 @@ import com.ludi.olegmoney.util.TestTag
 
 @Composable
 fun CheckboxWithText(
-    checkState: MutableState<Boolean> = remember { mutableStateOf(false) },
     text: String = "",
-    annotatedString: AnnotatedString? = null
+    annotatedString: AnnotatedString? = null,
+    onChecked: (Boolean) -> Unit = {}
 ) {
+    var checkState by remember { mutableStateOf(false) }
+
     Row(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Checkbox(
             modifier = Modifier.testTag(TestTag.CHECKBOX),
-            checked = checkState.value,
+            checked = checkState,
             onCheckedChange = {
-                checkState.value = it
+                checkState = it
+                onChecked(it)
             }
         )
 

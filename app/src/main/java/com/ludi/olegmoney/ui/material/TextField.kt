@@ -25,8 +25,10 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -45,11 +47,15 @@ import com.ludi.olegmoney.ui.theme.Shapes
 @Composable
 fun OlegTextField(
     name: String,
-    state: MutableState<String>,
     modifier: Modifier = Modifier,
+    onValueChanged: (String) -> Unit = {}
 ) {
-    OutlinedTextField(value = state.value, onValueChange = {
-        state.value = it
+
+    var value by remember { mutableStateOf("") }
+
+    OutlinedTextField(value = value, onValueChange = {
+        value = it
+        onValueChanged(it)
     }, label = {
         Text(name, style = MaterialTheme.typography.bodyMedium)
     }, colors = TextFieldDefaults.outlinedTextFieldColors(
@@ -63,29 +69,32 @@ fun OlegTextField(
 fun OlegPasswordTextField(
     modifier: Modifier = Modifier,
     label: String,
-    state: MutableState<String>,
-    passwordVisibleState: MutableState<Boolean> = mutableStateOf(false),
+    onValueChanged: (String) -> Unit,
 ) {
-    OutlinedTextField(value = state.value, onValueChange = {
-        state.value = it
+    var password by remember { mutableStateOf("") }
+    var passwordVisible by remember { mutableStateOf(false) }
+
+    OutlinedTextField(value = password, onValueChange = {
+        password = it
+        onValueChanged(it)
     }, label = {
         Text(label, style = MaterialTheme.typography.bodyMedium)
     }, colors = TextFieldDefaults.outlinedTextFieldColors(
         unfocusedBorderColor = OlegColor.FloralWhite, focusedBorderColor = OlegColor.Violet
-    ), shape = Shapes.medium, visualTransformation = if (passwordVisibleState.value) {
+    ), shape = Shapes.medium, visualTransformation = if (passwordVisible) {
         VisualTransformation.None
     } else {
         PasswordVisualTransformation()
     }, trailingIcon = {
-        val image = if (passwordVisibleState.value) {
+        val image = if (passwordVisible) {
             Icons.Filled.Visibility
         } else {
             Icons.Filled.VisibilityOff
         }
 
-        val description = if (passwordVisibleState.value) "Hide password" else "Show password"
+        val description = if (passwordVisible) "Hide password" else "Show password"
 
-        IconButton(onClick = { passwordVisibleState.value = !passwordVisibleState.value }) {
+        IconButton(onClick = { passwordVisible = !passwordVisible }) {
             Icon(imageVector = image, contentDescription = description)
         }
     }, modifier = modifier.fillMaxWidth()
@@ -101,16 +110,16 @@ fun PinTextField(
 ) {
     val focusRequester = remember { FocusRequester() }
 
-    BasicTextField(
-        modifier = modifier
-            .height(40.dp)
-            .focusRequester(focusRequester),
+    BasicTextField(modifier = modifier
+        .height(40.dp)
+        .focusRequester(focusRequester),
         value = pinState.value,
         onValueChange = {
             if (it.length <= maxDigit) {
                 pinState.value = it
             }
-        }, keyboardOptions = keyboardOptions,
+        },
+        keyboardOptions = keyboardOptions,
         decorationBox = {
             Row(
                 horizontalArrangement = Arrangement.Center,
