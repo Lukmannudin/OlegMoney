@@ -14,6 +14,7 @@ object Plugins {
     const val kotlinAndroidVersion = "1.8.10"
     const val hiltAndroidVersion = "2.44"
     const val detektVersion = "1.22.0"
+    const val googleServicesVersion = "4.4.0"
 }
 
 object Versions {
@@ -41,6 +42,9 @@ object Versions {
     const val compose = "1.4.3"
     const val hiltNavigationCompose = "1.0.0"
     const val wire = "4.9.1"
+    const val firebase = "32.7.0"
+    const val chucker = "4.0.0"
+    const val composeLifecycle = "2.6.2"
 }
 
 object Dependencies {
@@ -77,6 +81,7 @@ object Dependencies {
         const val uiTooling = "androidx.compose.ui:ui-tooling:${Versions.composeUiTooling}"
         const val uiTest = "androidx.compose.ui:ui-test-junit4:${Versions.compose}"
         const val uiTestManifest = "androidx.compose.ui:ui-test-manifest:${Versions.compose}"
+        const val lifecycle = "androidx.lifecycle:lifecycle-runtime-compose:${Versions.composeLifecycle}"
     }
 
     object ComposeMaterials {
@@ -119,6 +124,16 @@ object Dependencies {
     object Wire {
         const val wireRuntime = "com.squareup.wire:wire-runtime:${Versions.wire}"
         const val wireCompiler = "com.squareup.wire:wire-compiler:${Versions.wire}"
+    }
+
+    object Firebase {
+        const val bom = "com.google.firebase:firebase-bom:${Versions.firebase}"
+        const val analytics = "com.google.firebase:firebase-analytics"
+    }
+
+    object Chucker {
+        const val debugLibrary = "com.github.chuckerteam.chucker:library:${Versions.chucker}"
+        const val releaseLibrary = "com.github.chuckerteam.chucker:library-no-op:${Versions.chucker}"
     }
 
     const val retromock = "co.infinum:retromock:${Versions.retromock}"

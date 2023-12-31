@@ -139,15 +139,15 @@ dependencies {
     implementation(Dependencies.Wire.wireRuntime)
 
     // firebase
-    implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
-    implementation("com.google.firebase:firebase-analytics")
+    implementation(platform(Dependencies.Firebase.bom))
+    implementation(Dependencies.Firebase.analytics)
 
     // chucker
-    debugImplementation("com.github.chuckerteam.chucker:library:4.0.0")
-    releaseImplementation("com.github.chuckerteam.chucker:library-no-op:4.0.0")
+    debugImplementation(Dependencies.Chucker.debugLibrary)
+    releaseImplementation(Dependencies.Chucker.releaseLibrary)
 
     // compose
-    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.2")
+    implementation(Dependencies.Compose.lifecycle)
 }
 
 hilt {
