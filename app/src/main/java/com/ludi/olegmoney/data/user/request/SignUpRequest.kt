@@ -11,7 +11,7 @@ data class SignUpRequest(
     val email: String,
 
     @field:Json(name = "password")
-    val password: String,
+    val password: String? = null,
 
     @field:Json(name = "google_id")
     var googleId: String? = null,

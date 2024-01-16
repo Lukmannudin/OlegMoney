@@ -1,4 +1,4 @@
-package com.ludi.olegmoney.ui.material
+package com.ludi.olegmoney.ui.material.textfield
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
