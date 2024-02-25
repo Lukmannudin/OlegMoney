@@ -129,6 +129,7 @@ object Dependencies {
     object Firebase {
         const val bom = "com.google.firebase:firebase-bom:${Versions.firebase}"
         const val analytics = "com.google.firebase:firebase-analytics"
+        const val config = "com.google.firebase:firebase-config"
     }
 
     object Chucker {

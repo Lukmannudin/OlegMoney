@@ -10,12 +10,13 @@ import com.ludi.olegmoney.R
 import com.ludi.olegmoney.ui.OlegMoneyNavHost
 import com.ludi.olegmoney.ui.onboarding.signup.SignUpViewModel
 import com.ludi.olegmoney.ui.theme.OlegTheme
+import com.ludi.olegmoney.util.RemoteConfigManager
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class OnboardingActivity : ComponentActivity() {
 
-    val viewModel: SignUpViewModel by viewModels()
+    private val viewModel: SignUpViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +27,8 @@ class OnboardingActivity : ComponentActivity() {
         }
 
         setupGoogleService()
+
+        RemoteConfigManager(this)
     }
 
     private fun setupGoogleService() {

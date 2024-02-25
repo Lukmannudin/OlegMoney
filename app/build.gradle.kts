@@ -141,6 +141,7 @@ dependencies {
     // firebase
     implementation(platform(Dependencies.Firebase.bom))
     implementation(Dependencies.Firebase.analytics)
+    implementation(Dependencies.Firebase.config)
 
     // chucker
     debugImplementation(Dependencies.Chucker.debugLibrary)
