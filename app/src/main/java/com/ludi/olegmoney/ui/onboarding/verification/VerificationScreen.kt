@@ -120,7 +120,7 @@ fun VerificationScreen(
                     style = TextStyle(
                         fontFamily = FontInter,
                         fontWeight = FontWeight.Normal,
-                        fontSize = TextSize.heading,
+                        fontSize = TextSize.titleX,
                         color = OlegColor.Dark100
                     )
                 )

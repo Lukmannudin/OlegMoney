@@ -12,66 +12,74 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
 
 @Immutable
-data class OlegTypography(
-    val body: TextStyle,
-    val title: TextStyle
+data class ReplacementTypography(
+    val titleX: TextStyle,
+    val title1: TextStyle,
+    val title2: TextStyle,
+    val title3: TextStyle,
+    val regular1: TextStyle,
+    val regular2: TextStyle,
+    val regular3: TextStyle,
+    val small: TextStyle,
+    val tiny: TextStyle
 )
+
+private val replacementTypography = ReplacementTypography(
+    titleX = titleX,
+    title1 = title1,
+    title2 = title2,
+    title3 = title3,
+    regular1 = regular1,
+    regular2 = regular2,
+    regular3 = regular3,
+    small = small,
+    tiny = tiny
+)
+
+val LocalReplacementTypography = staticCompositionLocalOf {
+    replacementTypography
+}
 
 @Immutable
 data class OlegShapes(
-    val component: Shape,
-    val surface: Shape
+    val component: Shape, val surface: Shape
 )
-
-val LocalOlegTypography = staticCompositionLocalOf {
-    OlegTypography(
-        body = TextStyle.Default,
-        title = TextStyle.Default
-    )
-}
 
 val LocalOlegShapes = staticCompositionLocalOf {
     OlegShapes(
-        component = RoundedCornerShape(ZeroCornerSize),
-        surface = RoundedCornerShape(ZeroCornerSize)
+        component = RoundedCornerShape(ZeroCornerSize), surface = RoundedCornerShape(ZeroCornerSize)
     )
 }
 
 @Composable
 fun OlegTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
-    content: @Composable () -> Unit
+    darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit
 ) {
 
-    val olegTypography = OlegTypography(
-        body = Typography.bodyMedium,
-        title = Typography.titleMedium
-    )
 
     val olegShapes = OlegShapes(
-        component = Shapes.large,
-        surface = Shapes.medium
+        component = Shapes.large, surface = Shapes.medium
     )
 
     CompositionLocalProvider(
-        LocalOlegTypography provides olegTypography,
+        LocalReplacementTypography provides replacementTypography,
         LocalOlegShapes provides olegShapes
     ) {
         MaterialTheme(
             colorScheme = LightColorPalette,
-            typography = Typography,
             shapes = Shapes,
+            typography = Typography,
             content = content
         )
     }
 }
 
 object OlegTheme {
-    val typography: OlegTypography
+
+    val typography: ReplacementTypography
         @Composable
-        get() = LocalOlegTypography.current
+        get() = LocalReplacementTypography.current
 
     val shapes: OlegShapes
-        @Composable
-        get() = LocalOlegShapes.current
+        @Composable get() = LocalOlegShapes.current
 }
