@@ -17,6 +17,12 @@ object TextSize {
 }
 
 val Typography = Typography(
+    headlineMedium = TextStyle(
+        fontFamily = FontInter,
+        fontWeight = FontWeight.Medium,
+        fontSize = TextSize.heading,
+        color = OlegColor.Dark50
+    ),
     titleLarge = TextStyle(
         fontFamily = FontInter,
         fontWeight = FontWeight.Bold,

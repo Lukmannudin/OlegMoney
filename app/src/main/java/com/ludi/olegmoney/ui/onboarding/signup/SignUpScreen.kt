@@ -180,7 +180,7 @@ fun SignupScreen(
             Spacer(modifier = Modifier.height(Dimens.spacingXS))
 
             PrimaryButton(
-                enabled = signUpEnabled, text = stringResource(id = R.string.sign_up)
+                enabled = true, text = stringResource(id = R.string.sign_up)
             ) {
                 signUpViewModel.signUp(
                     SignUpRequest(

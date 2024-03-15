@@ -12,6 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ludi.olegmoney.ui.theme.Dimens
 import com.ludi.olegmoney.ui.theme.OlegColor
@@ -25,7 +26,9 @@ fun PrimaryButton(
     onClick: () -> Unit = {},
 ) {
     Button(
-        modifier = modifier.fillMaxWidth().height(56.dp),
+        modifier = modifier
+            .fillMaxWidth()
+            .height(56.dp),
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(containerColor = OlegColor.Violet),
         shape = Shapes.medium,
@@ -41,7 +44,9 @@ fun SecondaryButton(
     onClick: () -> Unit,
 ) {
     Button(
-        modifier = modifier.fillMaxWidth().height(56.dp),
+        modifier = modifier
+            .fillMaxWidth()
+            .height(56.dp),
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(containerColor = OlegColor.Violet20),
         shape = Shapes.medium,
@@ -110,6 +115,20 @@ private fun LocalTextStyle(
                 Spacer(modifier = Modifier.width(Dimens.spacingXXS))
             }
             Text(text = text)
+        }
+    }
+}
+
+@Preview
+@Composable
+fun ButtonsPreview() {
+    Column(
+       verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        PrimaryButton(text = "Label")
+
+        SecondaryButton(text = "Label") {
+
         }
     }
 }
