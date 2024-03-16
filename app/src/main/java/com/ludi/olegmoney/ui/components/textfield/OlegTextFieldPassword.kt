@@ -1,4 +1,4 @@
-package com.ludi.olegmoney.ui.material.textfield
+package com.ludi.olegmoney.ui.components.textfield
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import com.ludi.olegmoney.ui.theme.OlegColor
+import com.ludi.olegmoney.ui.theme.OlegTheme
 import com.ludi.olegmoney.ui.theme.Shapes
 
 
@@ -39,7 +40,7 @@ fun OlegPasswordTextField(
     }, label = {
         Text(label, style = MaterialTheme.typography.bodyMedium)
     }, colors = TextFieldDefaults.outlinedTextFieldColors(
-        unfocusedBorderColor = OlegColor.FloralWhite, focusedBorderColor = OlegColor.Violet
+        unfocusedBorderColor = OlegTheme.color.Light80, focusedBorderColor = OlegTheme.color.Violet100
     ), shape = Shapes.medium, visualTransformation = if (passwordVisible) {
         VisualTransformation.None
     } else {

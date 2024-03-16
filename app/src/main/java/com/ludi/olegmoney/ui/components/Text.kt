@@ -1,4 +1,4 @@
-package com.ludi.olegmoney.ui.material
+package com.ludi.olegmoney.ui.components
 
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material3.MaterialTheme
@@ -7,11 +7,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import com.ludi.olegmoney.ui.theme.OlegColor
+import com.ludi.olegmoney.ui.theme.OlegTheme
 
 @Composable
 fun OlegClickableText(
     text: String,
-    color: Color = OlegColor.Violet100,
+    color: Color = OlegTheme.color.Violet100,
     onClick: () -> Unit
 ) {
     ClickableText(

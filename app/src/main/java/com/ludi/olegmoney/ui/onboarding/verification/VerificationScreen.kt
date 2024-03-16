@@ -36,8 +36,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ludi.olegmoney.R
-import com.ludi.olegmoney.ui.material.PrimaryButton
-import com.ludi.olegmoney.ui.material.textfield.PinTextField
+import com.ludi.olegmoney.ui.components.PrimaryButton
+import com.ludi.olegmoney.ui.components.textfield.PinTextField
 import com.ludi.olegmoney.ui.theme.Dimens
 import com.ludi.olegmoney.ui.theme.FontInter
 import com.ludi.olegmoney.ui.theme.OlegColor
@@ -121,7 +121,7 @@ fun VerificationScreen(
                         fontFamily = FontInter,
                         fontWeight = FontWeight.Normal,
                         fontSize = TextSize.titleX,
-                        color = OlegColor.Dark100
+                        color = OlegTheme.color.Dark100
                     )
                 )
 
@@ -139,7 +139,7 @@ fun VerificationScreen(
 
                 Text(
                     text = timeLeft,
-                    style = MaterialTheme.typography.bodyLarge.plus(TextStyle(color = OlegColor.Violet100))
+                    style = MaterialTheme.typography.bodyLarge.plus(TextStyle(color = OlegTheme.color.Violet100))
                 )
 
                 Spacer(modifier = Modifier.height(Dimens.spacing))
@@ -149,7 +149,7 @@ fun VerificationScreen(
                 )
                 Text(
                     text = description.annotatedString(
-                        SpanStyle(color = OlegColor.Violet100), email
+                        SpanStyle(color = OlegTheme.color.Violet100), email
                     ), style = MaterialTheme.typography.bodyMedium
                 )
 
@@ -159,7 +159,7 @@ fun VerificationScreen(
                     text = stringResource(id = R.string.i_didnt_received_the_code),
                     style = MaterialTheme.typography.bodyMedium.plus(
                         TextStyle(
-                            color = OlegColor.Violet100, textDecoration = TextDecoration.Underline
+                            color = OlegTheme.color.Violet100, textDecoration = TextDecoration.Underline
                         )
                     )
                 )

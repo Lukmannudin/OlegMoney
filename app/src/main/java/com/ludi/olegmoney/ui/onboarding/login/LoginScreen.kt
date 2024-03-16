@@ -20,9 +20,9 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ludi.olegmoney.R
-import com.ludi.olegmoney.ui.material.*
-import com.ludi.olegmoney.ui.material.textfield.OlegPasswordTextField
-import com.ludi.olegmoney.ui.material.textfield.OlegTextField
+import com.ludi.olegmoney.ui.components.*
+import com.ludi.olegmoney.ui.components.textfield.OlegPasswordTextField
+import com.ludi.olegmoney.ui.components.textfield.OlegTextField
 import com.ludi.olegmoney.ui.theme.Dimens
 import com.ludi.olegmoney.ui.theme.OlegColor
 import com.ludi.olegmoney.ui.theme.OlegTheme
@@ -110,7 +110,7 @@ fun LoginScreen(
 
                 Text(
                     text = stringResource(id = R.string.forgot_password),
-                    color = OlegColor.Violet100,
+                    color = OlegTheme.color.Violet100,
                     style = MaterialTheme.typography.bodyLarge
                 )
 

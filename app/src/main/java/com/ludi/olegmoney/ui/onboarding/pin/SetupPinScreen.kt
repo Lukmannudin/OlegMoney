@@ -5,21 +5,15 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.ludi.olegmoney.ui.material.textfield.PinTextField
+import com.ludi.olegmoney.ui.components.textfield.PinTextField
 import com.ludi.olegmoney.ui.theme.OlegColor
 import com.ludi.olegmoney.ui.theme.OlegTheme
 
@@ -30,14 +24,14 @@ fun SetupPinScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(OlegColor.Violet100),
+            .background(OlegTheme.color.Violet100),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
         Spacer(modifier = Modifier.height(46.dp))
 
         Text(
-            color = OlegColor.Light80,
+            color = OlegTheme.color.Light80,
             text = "Let’s  setup your PIN"
         )
 

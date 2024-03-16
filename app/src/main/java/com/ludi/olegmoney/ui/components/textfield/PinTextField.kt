@@ -1,4 +1,4 @@
-package com.ludi.olegmoney.ui.material.textfield
+package com.ludi.olegmoney.ui.components.textfield
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -29,6 +29,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ludi.olegmoney.ui.theme.Dimens
 import com.ludi.olegmoney.ui.theme.OlegColor
+import com.ludi.olegmoney.ui.theme.OlegTheme
 
 
 @Composable
@@ -69,7 +70,7 @@ fun PinTextField(
                         Text(
                             text = char,
                             style = MaterialTheme.typography.titleLarge,
-                            color = OlegColor.Dark75,
+                            color = OlegTheme.color.Dark75,
                             textAlign = TextAlign.Center,
                         )
                     } else {
@@ -77,7 +78,7 @@ fun PinTextField(
                             modifier = Modifier
                                 .size(Dimens.spacing)
                                 .clip(CircleShape)
-                                .background(OlegColor.Light20),
+                                .background(OlegTheme.color.Light20),
                         )
                     }
 

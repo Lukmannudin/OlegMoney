@@ -39,12 +39,12 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.android.gms.common.api.ApiException
 import com.ludi.olegmoney.R
 import com.ludi.olegmoney.data.user.request.SignUpRequest
-import com.ludi.olegmoney.ui.material.CheckboxWithText
-import com.ludi.olegmoney.ui.material.OlegClickableText
-import com.ludi.olegmoney.ui.material.OlegOutlinedButton
-import com.ludi.olegmoney.ui.material.textfield.OlegTextField
-import com.ludi.olegmoney.ui.material.PrimaryButton
-import com.ludi.olegmoney.ui.material.textfield.OlegPasswordTextField
+import com.ludi.olegmoney.ui.components.CheckboxWithText
+import com.ludi.olegmoney.ui.components.OlegClickableText
+import com.ludi.olegmoney.ui.components.OlegOutlinedButton
+import com.ludi.olegmoney.ui.components.textfield.OlegTextField
+import com.ludi.olegmoney.ui.components.PrimaryButton
+import com.ludi.olegmoney.ui.components.textfield.OlegPasswordTextField
 import com.ludi.olegmoney.ui.theme.Dimens
 import com.ludi.olegmoney.ui.theme.OlegColor
 import com.ludi.olegmoney.ui.theme.OlegTheme
@@ -171,7 +171,7 @@ fun SignupScreen(
 
             CheckboxWithText(
                 annotatedString = stringResource(id = R.string.signup_terms_condition).parseFont(
-                    spanStyle = SpanStyle(color = OlegColor.Violet)
+                    spanStyle = SpanStyle(color = OlegTheme.color.Violet100)
                 )
             ) {
                 readCondition = it

@@ -10,9 +10,9 @@ object Sdk {
 }
 
 object Plugins {
-    const val androidAppVersion = "7.4.2"
+    const val androidAppVersion = "8.2.0"
     const val kotlinAndroidVersion = "1.8.10"
-    const val hiltAndroidVersion = "2.44"
+    const val hiltAndroidVersion = "2.50"
     const val detektVersion = "1.22.0"
     const val googleServicesVersion = "4.4.0"
 }

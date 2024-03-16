@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="normal">16dp</dimen>
+
+    <dimen name="icon_large">32dp</dimen>
+    <dimen name="icon_normal">24dp</dimen>
+
+    <dimen name="button_height">56dp</dimen>
+    <dimen name="button_pill_height">32dp</dimen>
 </resources>

@@ -22,8 +22,8 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
 import com.ludi.olegmoney.ui.DotsIndicator
-import com.ludi.olegmoney.ui.material.PrimaryButton
-import com.ludi.olegmoney.ui.material.SecondaryButton
+import com.ludi.olegmoney.ui.components.PrimaryButton
+import com.ludi.olegmoney.ui.components.SecondaryButton
 import com.ludi.olegmoney.ui.theme.Dimens
 import com.ludi.olegmoney.ui.theme.OlegTheme
 import com.ludi.olegmoney.R
