@@ -1,5 +1,6 @@
 package com.ludi.olegmoney.ui.components
 
+import android.annotation.SuppressLint
 import androidx.annotation.DimenRes
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.BorderStroke
@@ -11,10 +12,10 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -109,31 +110,24 @@ fun TertiaryButton(
                         .widthIn(min = iconNormal, max = iconLarge)
                         .heightIn(min = iconNormal, max = iconLarge),
                     painter = painterResource(id = iconRes),
-                    tint = OlegTheme.color.Dark50,
+                    tint = OlegTheme.color.dark50,
                     contentDescription = ""
                 )
                 Spacer(modifier = Modifier.width(OlegTheme.spacing.spacing3))
             }
 
             Text(
-                text = text, style = getTextStyle(style = style), color = OlegTheme.color.Dark50
+                text = text, style = getTextStyle(style = style), color = OlegTheme.color.dark50
             )
         }
     )
 }
 
+@SuppressLint("UnnecessaryComposedModifier")
 private fun Modifier.getModifierSize(style: Style): Modifier = composed {
-    val customModifier = when (style) {
-        Style.LARGE -> Modifier.fillMaxWidth()
-        Style.SMALL -> Modifier.padding(
-            horizontal = OlegTheme.spacing.spacing10, vertical = OlegTheme.spacing.spacing5
-        )
-
-        Style.PILLS -> Modifier.padding(
-            horizontal = OlegTheme.spacing.spacing5, vertical = OlegTheme.spacing.spacing3
-        )
-    }
-
+    val customModifier = if (style == Style.LARGE) {
+        then(Modifier.fillMaxWidth())
+    } else Modifier.wrapContentWidth()
     then(customModifier)
 }
 
@@ -167,7 +161,9 @@ fun ButtonView(
     iconRes: Int?,
     iconColor: Color?
 ) {
-    Button(modifier = modifier.height(dimensionResource(id = getButtonHeight(style))),
+
+    Button(
+        modifier = modifier.height(dimensionResource(id = getButtonHeight(style))),
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(containerColor = color),
         shape = Shapes.medium,
@@ -210,7 +206,7 @@ fun OlegOutlinedButton(
         colors = ButtonDefaults.buttonColors(containerColor = Color.White),
         shape = Shapes.medium,
         border = BorderStroke(1.dp, OlegTheme.color.Light60),
-        content = { LocalTextStyle(text = text, OlegTheme.color.Dark50, iconRes) })
+        content = { LocalTextStyle(text = text, OlegTheme.color.dark50, iconRes) })
 }
 
 @Composable
@@ -286,8 +282,13 @@ fun LargeButtonsWithIconPreview() {
 @Composable
 fun SmallButtonsPreview() {
     OlegTheme {
-        Column {
-            PrimaryButton(text = "Primary", style = Style.SMALL)
+        Column(
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            PrimaryButton(
+                text = "Primary",
+                style = Style.SMALL,
+            )
             SecondaryButton(text = "Secondary", style = Style.SMALL)
             TertiaryButton(text = "Tertiary", style = Style.SMALL)
         }
@@ -298,7 +299,9 @@ fun SmallButtonsPreview() {
 @Composable
 fun PillsButtonsPreview() {
     OlegTheme {
-        Column {
+        Column(
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
             PrimaryButton(text = "Primary", style = Style.PILLS)
             SecondaryButton(text = "Secondary", style = Style.PILLS)
             TertiaryButton(text = "Tertiary", style = Style.PILLS)

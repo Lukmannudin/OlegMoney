@@ -16,24 +16,15 @@ data class OlegShapes(
     val component: Shape, val surface: Shape
 )
 
-val LocalOlegShapes = staticCompositionLocalOf {
-    OlegShapes(
-        component = RoundedCornerShape(ZeroCornerSize), surface = RoundedCornerShape(ZeroCornerSize)
-    )
-}
 
 @Composable
 fun OlegTheme(
     darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit
 ) {
 
-    val olegShapes = OlegShapes(
-        component = Shapes.large, surface = Shapes.medium
-    )
-
     CompositionLocalProvider(
         LocalReplacementTypography provides replacementTypography,
-        LocalOlegShapes provides olegShapes,
+        LocalOlegShapes provides extendedMatterShape,
         LocalOlegSpacing provides olegSpacing,
         LocalReplacementColor provides olegColor
     ) {
@@ -51,7 +42,7 @@ object OlegTheme {
         @Composable
         get() = LocalReplacementTypography.current
 
-    val shapes: OlegShapes
+    val shapes: ExtendedOlegShape
         @Composable get() = LocalOlegShapes.current
 
     val spacing: OlegSpacing

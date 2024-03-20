@@ -149,13 +149,13 @@ fun SignupScreen(
         ) {
             Spacer(modifier = Modifier.height(56.dp))
 
-            OlegTextField(name = stringResource(id = R.string.name)) {
+            OlegTextField(value = stringResource(id = R.string.name)) {
                 name = it
             }
 
             Spacer(modifier = Modifier.height(Dimens.spacingXXS))
 
-            OlegTextField(name = stringResource(id = R.string.email)) {
+            OlegTextField(value = stringResource(id = R.string.email)) {
                 email = it
             }
 

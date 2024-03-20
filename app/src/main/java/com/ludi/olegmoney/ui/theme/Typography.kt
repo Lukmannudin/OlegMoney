@@ -3,7 +3,6 @@ package com.ludi.olegmoney.ui.theme
 import androidx.compose.material3.Typography
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.staticCompositionLocalOf
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
@@ -125,7 +124,7 @@ val Typography = Typography(
         fontFamily = FontInter,
         fontWeight = FontWeight.Medium,
         fontSize = TextSize.titleX,
-        color = olegColor.Dark50
+        color = olegColor.dark50
     ),
     titleLarge = TextStyle(
         fontFamily = FontInter,
@@ -155,12 +154,12 @@ val Typography = Typography(
         fontFamily = FontInter,
         fontWeight = FontWeight.Normal,
         fontSize = TextSize.regular1,
-        color = olegColor.Dark50
+        color = olegColor.dark50
     ),
     bodySmall = TextStyle(
         fontFamily = FontInter,
         fontWeight = FontWeight.Normal,
         fontSize = TextSize.regular2,
-        color = olegColor.Dark25
+        color = olegColor.dark25
     ),
 )

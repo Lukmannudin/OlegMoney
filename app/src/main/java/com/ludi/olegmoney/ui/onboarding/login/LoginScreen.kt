@@ -85,7 +85,7 @@ fun LoginScreen(
             ) {
                 Spacer(modifier = Modifier.height(56.dp))
 
-                OlegTextField(name = stringResource(id = R.string.name)) {
+                OlegTextField(value = stringResource(id = R.string.name)) {
                     name = it
                 }
 
